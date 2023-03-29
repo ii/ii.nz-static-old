@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Learning Update: Introduction to gRPC | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/grpc-learning\/",
+      "name": "Learning Update: Introduction to gRPC",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">Learning Update: Introduction to gRPC</h1>
+              📆<time datetime="2021-03-09 00:00:00 &#43;0000 UTC" class="post__date">Mar 9 2021</time> 
+              <span class="post__date">🕚 8 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/zach-mandeville>
+                  Zach Mandeville
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<h2 id="prelude"><a href="#prelude" class="anchor">#</a>Prelude</h2>
+<p>As I continue my career in code, I&rsquo;ve come to find the most important part of my
+practice is also the least visible: how I learn. There are beautiful moments
+when I know exactly how to do something and just need to implement it so I&rsquo;ll
+pour myself a cup of coffee, put <a href="https://www.youtube.com/watch?v=wmin5WkOuPw" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Firestarter</a>
+ on repeat, and watch my beautiful code
+unfurl down the screen as fast as I can type it. These moments, though, are not
+typical.</p>
+<p>Most of the time, I am discovering a new problem I do not yet know how to solve,
+within a domain or technology I have not yet experienced, and to solve the
+problem i have to first understand it. Here my coding life is a bit quieter and
+boring to watch: I&rsquo;ll pour myself a cup of tea, put Firestarter(lo-fi ambient
+remix) on repeat, and start poring through reference docs and tutorials and
+writing &ldquo;TODO: FIGURE OUT WHAT {X} MEANS&rdquo; in my expanding network of notes.</p>
+<p>This work is crucial for code, but often unseen, happening silently in the space
+between git commits. And so, to celebrate this work and make it more visible,
+we&rsquo;ll be posting periodic learning updates on this blog. These are written as
+honest checkpoints taken mid-understanding, so while they are hopefully
+illuminating, they should not be read as any sort of authoratative guide.</p>
+<p>Sweet as, let&rsquo;s set a checkpoint! Right now, I&rsquo;m learning all about gRPC and
+protocol buffers and am quite excited about everything I&rsquo;ve found.</p>
+<h2 id="grpc-what-s-it-mean"><a href="#grpc-what-s-it-mean" class="anchor">#</a>gRPC: what&rsquo;s it mean?</h2>
+<p>gRPC stands for (google)Remote Procedure Call. It is an evolution of Remote
+Procedure Calls, which is one of the primary models of api design (the other
+being REST). So RPC involves specifying how clients and servers should
+communicate with one another, but using a completely different paradigm than
+REST. One of the most immediate distinctions, for me, is with REST you have
+paths on the server that you make requests to, whereas with RPC it&rsquo;s more like
+methods of a server interface that you can call. This is the &ldquo;remote procedure&rdquo;
+aspect of the design, where on the client&rsquo;s side, the communication feels like
+running functions directly on the server.</p>
+<p>The way gRPC operates, sort of the material of the design, is with protocol
+buffers. And so to learn gRPC you want to have a good understanding of protocol
+buffers (or protobuf) first.</p>
+<h2 id="protocol-buffers-what-do-they-mean"><a href="#protocol-buffers-what-do-they-mean" class="anchor">#</a>Protocol Buffers: What do they mean?</h2>
+<p>Protocol Buffers are another creation of Google, and are a way to define and
+serialize data. They tackle the same problem as XML or JSON, but in a much
+different way.</p>
+<p>Protocol buffers work by defining a fully typed contract for your API in a
+.proto file, which is then used to generate source code and compile your data
+into streamable bytes. So the data being passed along is binary instead of
+text-based, but the specification of this data is extremely readable, and
+can easily generate introspective tools and documentation.</p>
+<p>Proto buffers also feel distinct in that they were designed with modern
+technology and modern paradigms. So they work with HTTP/2 and work extremely
+well for micro-services architectures utilizing streams of data. This HTTP/2
+requirement also means, though, that they cannot be consumed direclty by a web
+browser.</p>
+<h2 id="well-known-advantages-of-grpc-and-protobuf"><a href="#well-known-advantages-of-grpc-and-protobuf" class="anchor">#</a>Well-Known Advantages of gRPC and protobuf</h2>
+<p>Many of the advantages of gRPC are articulated well on the grpc.io homepage and
+other blogs and resources. I do not want to reiterate the same points, and will
+have links to resources I find useful at the bottom of this post. In short,
+gRPC:</p>
+<ul>
+<li>saves network bandwidth</li>
+<li>provides faster and more efficient communication</li>
+<li>can be used by any language</li>
+<li>offers client-streaming, server-streaming, and bidirectional streaming services</li>
+<li>allows for easy evolution and iteration of your api, while keeping backward compatability.</li>
+<li>has an api contract that is easy to write and understand.</li>
+</ul>
+<h2 id="my-favourite-things-so-far-about-grpc"><a href="#my-favourite-things-so-far-about-grpc" class="anchor">#</a>My favourite things so far about gRPC</h2>
+<p>Since I am just starting to explore gRPC, I cannot speak well to the system-wide
+advantages of it and how I find it works in production. There are immediate
+ergonomic and conceptual advantages to it though that I find quite exciting.</p>
+<h3 id="writing-and-reading-api-s"><a href="#writing-and-reading-api-s" class="anchor">#</a>Writing and Reading API&rsquo;s</h3>
+<p>For one, the type definitions makes writing your api, and understanding others,
+quite simple. You can read a `.proto` file as if it were documentation (and
+still generate documentation from it). For example, a service that takes a
+subject and returns a poem would look like this:</p>
+<pre><code class="language-text">syntax = 'proto3';
+
+message Subject {
+ string name = 1;
+ string mood = 2;
+ repeated string keywords = 3;
+}
+
+message Poem {
+  string title = 1;
+  string body = 2;
+  int32 edition = 3;
+}
+
+message PoemGeneratorRequest {
+  Subject subject = 1;
+}
+
+message PoemGeneratorResponse {
+  Poem poem = 1;
+}
+
+service PoemService {
+  rpc PoemGenerator(PoemGeneratorRequest) returns (PoemGeneratorResponse) {};
+}
+</code></pre>
+<p>I found that, with no knowledge of the syntax of protocol buffers, I could
+understand specs like this immediately. Much of the proto&rsquo;s syntax is
+understanble through context clues. You define some messages that are made up of
+fields with specific types, and then define a services for passing these
+messages. With protobuf, you work from foundational types that then get
+increasingly complex while maintaining consistent syntax. This is possible in a
+REST API too through discipline and convention, but here that discipline is
+baked into the structure itself.</p>
+<p>Also, evolving an API is relatively simple. If I wanted to introduce a new field
+in my poem subjects, it would look like so:</p>
+<pre><code class="language-text">message Subject {
+ string name = 1;
+ string mood = 2;
+ repeated string keywords = 3;
+ string season = 4;
+}
+</code></pre>
+<p>Each field has a default value, which is used if no other value is provided. So
+services set up for the older api would not pass along the <code>season</code> field, and
+it&rsquo;d be interpreted as an empty string. Similarly, if we send messages from the
+new api to an old service, it will simply drop any field it doesn&rsquo;t understand.
+Deprecating fields requires a bit more work, but is equally straightforward. So
+while you will need to ensure your clients account for default values, gRPC
+makes it simple to evolve your api without breaking changes.</p>
+<h3 id="code-generation-and-tool-integration"><a href="#code-generation-and-tool-integration" class="anchor">#</a>Code generation and tool integration</h3>
+<p>One awesome part of protobuf and gRPC is its code generation. After you&rsquo;ve
+defined your API, you can use the program <a href="https://github.com/protocolbuffers/protobuf" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>protoc</a>
+ to generate code into several
+languages. This means much of the logic for my server and client is taken care
+of for me, and I could focus on the business logic.</p>
+<p>protoc outputs to several different languages, but the one I&rsquo;ve been working
+with is Go. Go also originated in Google, and you can feel the shared principles
+and purpose through how well integrated these three services are. The biggest
+productivity boost for me was the LSP integration. I would define a new service,
+generate the go code, switch over to my server code and as I started to type the
+service&rsquo;s name, my editor would immediately start showing me the methods
+available to this service and their signatures. It is like having a quiet, eager
+assistant handing you all your tools as you need them. It also meant that I was
+immediately working on my code at this strategic higher-level. I was concerned
+with the structure and flow of data as so much of the implementation code was
+generated for me.</p>
+<h3 id="reflection-and-introspection"><a href="#reflection-and-introspection" class="anchor">#</a>Reflection and Introspection</h3>
+<p>Lastly, a quality of gRPC that makes it real exciting to learn is in the ease of
+its introspection. The typed nature of protobuf allows for easy, consistent
+integration with a range of tools beyond your own services. I saw that
+immediately with the LSP integration and emacs, but was truly chuffed when I
+discovered the <a href="https://github.com/ktr0731/evans" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Evans CLI</a>
+. If you have reflection enabled on your server, which
+is straightforward to do, then you can immediately start communicating with it
+using Evans. Evans reminded me a bit of the postgres client `psql`, which is one
+of my favourite tools. With both, use a simple set of commands to investigate
+and richly describe the service you&rsquo;re building in a repl environment. It turns
+the development of your services into this dynamic, tangible experience that
+rewards curiosity.</p>
+<p>I know I have a lot to learn about gRPC, but I am immediately pleased, and
+grateful, that the framework has so many features that makes the learning
+experience rewarding and fun.</p>
+<h2 id="resources"><a href="#resources" class="anchor">#</a>Resources</h2>
+<p>I&rsquo;ve found the following online resources useful for getting into the why&rsquo;s and
+how&rsquo;s of gRPC and protobuf:</p>
+<ul>
+<li><a href="https://grpc.io/docs/what-is-grpc/introduction/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>grpc.io&rsquo;s official docs</a>
+ are quite good and a great introduction.</li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/overview" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>The Developer Docs for Protocol Buffers</a>
+ is similarly good.</li>
+<li><a href="https://www.youtube.com/watch?v=RoXT%5FRkg8LA" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Alan Shreve&rsquo;s Talk on gRPC</a>
+ is fun and engaging, and he offers a good
+high-level look at the framework, its historical context, and its benefits.</li>
+<li><a href="https://www.udemy.com/course/grpc-golang/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Stephan Maarek&rsquo;s gRPC class on Udemy</a>
+ is in-depth, patient, and hands-on. It is
+a good balance of theory and implementation, with enough footholds for you to
+go on and learn more.</li>
+<li><a href="https://www.youtube.com/watch?v=RVZX4CwKhGE&amp;t=2915s" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Lyft&rsquo;s Envoy: from Monolith to Service Mesh</a>
+ is a talk by Matt Klein about the
+Envoy proxy, which is a gRPC api. It&rsquo;s a good talk, that shows the exciting
+and complex things you can design with this framework.</li>
+</ul>
+
+
+            
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/deplying-talos-to-equinix/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">Deploying Talos to Equinix</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/cncf-dan/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >Thank You Dan Kohn</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ii.nz</title>
+    <link>https://ii.nz/author/zach-mandeville/</link>
+    <description>Recent content on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/author/zach-mandeville/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>xDS Conformance Project</title>
+      <link>https://ii.nz/post/xds-conformance-project/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/xds-conformance-project/</guid>
+      <description>A look into the work ii has done on the xdS conformance test framework</description>
+    </item>
+    
+    <item>
+      <title>Learning Update: Introduction to gRPC</title>
+      <link>https://ii.nz/post/grpc-learning/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/grpc-learning/</guid>
+      <description>An update on an ii member&amp;rsquo;s journey on learning gRPC</description>
+    </item>
+    
+  </channel>
+</rss>

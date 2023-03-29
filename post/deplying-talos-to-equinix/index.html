@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Deploying Talos to Equinix | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/deplying-talos-to-equinix\/",
+      "name": "Deploying Talos to Equinix",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">Deploying Talos to Equinix</h1>
+              📆<time datetime="2021-02-03 00:00:00 &#43;0000 UTC" class="post__date">Feb 3 2021</time> 
+              <span class="post__date">🕚 11 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/caleb-woodbine>
+                  Caleb Woodbine
+                </a>
+                
+                <a class="author" href=/author/andrew-rynhard>
+                  Andrew Rynhard
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<h2 id="introduction"><a href="#introduction" class="anchor">#</a>Introduction</h2>
+<p>In this guide we will launch a highly-available three Node Kubernetes cluster on Equinix Metal using Talos as the Node OS, as well as bootstrap, and controlPlane provider for Cluster-API.</p>
+<p>What is <a href="https://cluster-api.sigs.k8s.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Cluster-API</a>
+?
+:</p>
+<blockquote>
+<p>Cluster API is a Kubernetes sub-project focused on providing declarative APIs and tooling to simplify provisioning, upgrading, and operating multiple Kubernetes clusters.</p>
+</blockquote>
+<p>What is <a href="https://www.talos.dev/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Talos</a>
+?
+:</p>
+<blockquote>
+<p>Talos is a modern OS designed to be secure, immutable, and minimal.</p>
+</blockquote>
+<p>What is <a href="https://metal.equinix.com/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Equinix Metal</a>
+?
+:</p>
+<blockquote>
+<p>A globally-available bare metal “as-a-service” that can be deployed and interconnected in minutes.</p>
+</blockquote>
+<p>The folks over at Equinix Metal have a wonderful heart for supporting Open Source communities.</p>
+<dl>
+<dt>Why is this important?</dt>
+<dd>In general: Orchestrating a container based OS such as Talos (<a href="http://flatcar-linux.org/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Flatcar</a>
+, <a href="https://getfedora.org/coreos/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Fedora CoreOS</a>
+, or <a href="https://rancher.com/products/rancher/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>RancherOS</a>
+) shifts focus from the Nodes to the workloads. In terms of Talos: Currently the documentation for running an OS such as Talos in Equinix Metal for Kubernetes with Cluster-API is not so well documented and therefore inaccessible. It&rsquo;s important to fill in the gaps of knowledge.</dd>
+</dl>
+<h2 id="dependencies"><a href="#dependencies" class="anchor">#</a>Dependencies</h2>
+<p>What you&rsquo;ll need for this guide:</p>
+<ul>
+<li>
+<p><a href="https://github.com/talos-systems/talos/releases/tag/v0.8.1" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>talosctl</a>
+</p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>kubectl</a>
+</p>
+</li>
+<li>
+<p><a href="https://github.com/packethost/packet-cli" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>packet-cli</a>
+</p>
+</li>
+<li>
+<p>the ID and API token of existing Equinix Metal project</p>
+</li>
+<li>
+<p>an existing Kubernetes cluster with a public IP (such as <a href="http://kind.sigs.k8s.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>kind</a>
+, <a href="https://minikube.sigs.k8s.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>minikube</a>
+, or a cluster already on Equinix Metal)</p>
+</li>
+</ul>
+<h2 id="prelimiary-steps"><a href="#prelimiary-steps" class="anchor">#</a>Prelimiary steps</h2>
+<p>In order to talk to Equinix Metal, we&rsquo;ll export environment variables to configure resources and talk via <code>packet-cli</code>.</p>
+<p>Set the correct project to create and manage resources in:</p>
+<pre><code class="language-tmate">  read -p 'PACKET_PROJECT_ID: ' PACKET_PROJECT_ID
+</code></pre>
+<p>The API key for your account or project:</p>
+<pre><code class="language-tmate">  read -p 'PACKET_API_KEY: ' PACKET_API_KEY
+</code></pre>
+<p>Export the variables to be accessible from <code>packet-cli</code> and <code>clusterctl</code> later on:</p>
+<pre><code class="language-tmate">  export PACKET_PROJECT_ID PACKET_API_KEY PACKET_TOKEN=$PACKET_API_KEY
+</code></pre>
+<p>In the existing cluster, a public LoadBalancer IP will be needed. I have already installed nginx-ingress in this cluster, which has got a Service with the cluster&rsquo;s elastic IP.
+We&rsquo;ll need this IP address later for use in booting the servers.
+If you have set up your existing cluster differently, it&rsquo;ll just need to be an IP that we can use.</p>
+<pre><code class="language-tmate">  export LOAD_BALANCER_IP=&quot;$(kubectl -n nginx-ingress get svc nginx-ingress-ingress-nginx-controller -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')&quot;
+</code></pre>
+<h2 id="setting-up-cluster-api"><a href="#setting-up-cluster-api" class="anchor">#</a>Setting up Cluster-API</h2>
+<p>Install Talos providers for Cluster-API bootstrap and controlplane in your existing cluster:</p>
+<pre><code class="language-tmate">  clusterctl init -b talos -c talos -i packet
+</code></pre>
+<p>This will install Talos&rsquo;s bootstrap and controlPlane controllers as well as the Packet / Equinix Metal infrastructure provider.</p>
+<p><strong><strong>Important</strong></strong> note:</p>
+<ul>
+<li>the <code>bootstrap-talos</code> controller in the <code>cabpt-system</code> namespace must be running a version greater than <code>v0.2.0-alpha.8</code>. The version can be displayed in with <code>clusterctl upgrade plan</code> when it&rsquo;s installed.</li>
+</ul>
+<h2 id="setting-up-matchbox"><a href="#setting-up-matchbox" class="anchor">#</a>Setting up Matchbox</h2>
+<p>Currently, since Equinix Metal have <strong><strong>not</strong></strong> yet added support for Talos, it is necessary to install <a href="https://matchbox.psdn.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Matchbox</a>
+ to boot the servers (There is an <a href="https://github.com/packethost/packet-images/issues/26" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>issue</a>
+ in progress and <a href="https://feedback.equinixmetal.com/operating-systems/p/talos-as-officially-supported-operating-system" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>feedback</a>
+ for adding support).</p>
+<p>What is Matchbox?
+:</p>
+<blockquote>
+<p>Matchbox is a service that matches bare-metal machines to profiles that PXE boot and provision clusters.</p>
+</blockquote>
+<p>Here is the manifest for a basic matchbox installation:</p>
+<pre><code class="language-yaml">  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: matchbox
+  spec:
+    replicas: 1
+    strategy:
+      rollingUpdate:
+        maxUnavailable: 1
+    selector:
+      matchLabels:
+        name: matchbox
+    template:
+      metadata:
+        labels:
+          name: matchbox
+      spec:
+        containers:
+          - name: matchbox
+            image: quay.io/poseidon/matchbox:v0.9.0
+            env:
+              - name: MATCHBOX_ADDRESS
+                value: &quot;0.0.0.0:8080&quot;
+              - name: MATCHBOX_LOG_LEVEL
+                value: &quot;debug&quot;
+            ports:
+              - name: http
+                containerPort: 8080
+            livenessProbe:
+              initialDelaySeconds: 5
+              httpGet:
+                path: /
+                port: 8080
+            resources:
+              requests:
+                cpu: 30m
+                memory: 20Mi
+              limits:
+                cpu: 50m
+                memory: 50Mi
+            volumeMounts:
+              - name: data
+                mountPath: /var/lib/matchbox
+              - name: assets
+                mountPath: /var/lib/matchbox/assets
+        volumes:
+          - name: data
+            hostPath:
+              path: /var/local/matchbox/data
+          - name: assets
+            hostPath:
+              path: /var/local/matchbox/assets
+  ---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: matchbox
+    annotations:
+      metallb.universe.tf/allow-shared-ip: nginx-ingress
+  spec:
+    type: LoadBalancer
+    selector:
+      name: matchbox
+    ports:
+      - name: http
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+</code></pre>
+<p>Save it as <code>matchbox.yaml</code></p>
+<p>The manifests above were inspired by the manifests in the <a href="https://github.com/poseidon/matchbox/tree/master/contrib/k8s" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>matchbox repo</a>
+.
+For production it might be wise to use:</p>
+<ul>
+<li>an Ingress with full TLS</li>
+<li>a ReadWriteMany storage provider instead hostPath for scaling</li>
+</ul>
+<p>With the manifests ready to go, we&rsquo;ll install Matchbox into the <code>matchbox</code> namespace on the existing cluster with the following commands:</p>
+<pre><code class="language-tmate">  kubectl create ns matchbox
+  kubectl -n matchbox apply -f ./matchbox.yaml
+</code></pre>
+<p>You may need to patch the <code>Service.spec.externalIPs</code> to have an IP to access it from if one is not populated:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox patch \
+    service matchbox \
+    -p &quot;{\&quot;spec\&quot;:{\&quot;externalIPs\&quot;:[\&quot;$LOAD_BALANCER_IP\&quot;]}}&quot;
+</code></pre>
+<p>Once the pod is live, We&rsquo;ll need to create a directory structure for storing Talos boot assets:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox exec -it \
+    deployment/matchbox -- \
+    mkdir -p /var/lib/matchbox/{profiles,groups} /var/lib/matchbox/assets/talos
+</code></pre>
+<p>Inside the Matchbox container, we&rsquo;ll download the Talos boot assets for Talos version 0.8.1 into the assets folder:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox exec -it \
+    deployment/matchbox -- \
+    wget -P /var/lib/matchbox/assets/talos \
+    https://github.com/talos-systems/talos/releases/download/v0.8.1/initramfs-amd64.xz \
+    https://github.com/talos-systems/talos/releases/download/v0.8.1/vmlinuz-amd64
+</code></pre>
+<p>Now that the assets have been downloaded, run a checksum against them to verify:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox exec -it \
+    deployment/matchbox -- \
+    sh -c &quot;cd /var/lib/matchbox/assets/talos &amp;&amp; \
+      wget -O- https://github.com/talos-systems/talos/releases/download/v0.8.1/sha512sum.txt 2&gt; /dev/null \
+      | sed 's,_out/,,g' \
+      | grep 'initramfs-amd64.xz\|vmlinuz-amd64' \
+      | sha512sum -c -&quot;
+</code></pre>
+<p>Since there&rsquo;s only one Pod in the Matchbox deployment, we&rsquo;ll export it&rsquo;s name to copy files into it:</p>
+<pre><code class="language-tmate">  export MATCHBOX_POD_NAME=$(kubectl -n matchbox get pods -l name=matchbox -o=jsonpath='{.items[0].metadata.name}')
+</code></pre>
+<p><a href="https://matchbox.psdn.io/matchbox/#profiles" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Profiles in Matchbox</a>
+ are JSON configurations for how the servers should boot, where from, and their kernel args. Save this file as <code>profile-default-amd64.json</code></p>
+<pre><code class="language-json">  {
+    &quot;id&quot;: &quot;default-amd64&quot;,
+    &quot;name&quot;: &quot;default-amd64&quot;,
+    &quot;boot&quot;: {
+      &quot;kernel&quot;: &quot;/assets/talos/vmlinuz-amd64&quot;,
+      &quot;initrd&quot;: [
+        &quot;/assets/talos/initramfs-amd64.xz&quot;
+      ],
+      &quot;args&quot;: [
+        &quot;initrd=initramfs-amd64.xz&quot;,
+        &quot;init_on_alloc=1&quot;,
+        &quot;init_on_free=1&quot;,
+        &quot;slub_debug=P&quot;,
+        &quot;pti=on&quot;,
+        &quot;random.trust_cpu=on&quot;,
+        &quot;console=tty0&quot;,
+        &quot;console=ttyS1,115200n8&quot;,
+        &quot;slab_nomerge&quot;,
+        &quot;printk.devkmsg=on&quot;,
+        &quot;talos.platform=packet&quot;,
+        &quot;talos.config=none&quot;
+      ]
+    }
+  }
+</code></pre>
+<p><a href="https://matchbox.psdn.io/matchbox/#groups" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Groups in Matchbox</a>
+ are a way of letting servers pick up profiles based on selectors. Save this file as <code>group-default-amd64.json</code></p>
+<pre><code class="language-json">  {
+    &quot;id&quot;: &quot;default-amd64&quot;,
+    &quot;name&quot;: &quot;default-amd64&quot;,
+    &quot;profile&quot;: &quot;default-amd64&quot;,
+    &quot;selector&quot;: {
+      &quot;arch&quot;: &quot;amd64&quot;
+    }
+  }
+</code></pre>
+<p>We&rsquo;ll copy the profile and group into their respective folders:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox \
+    cp ./profile-default-amd64.json \
+    $MATCHBOX_POD_NAME:/var/lib/matchbox/profiles/default-amd64.json
+  kubectl -n matchbox \
+    cp ./group-default-amd64.json \
+    $MATCHBOX_POD_NAME:/var/lib/matchbox/groups/default-amd64.json
+</code></pre>
+<p>List the files to validate that they were written correctly:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox exec -it \
+    deployment/matchbox -- \
+    sh -c 'ls -alh /var/lib/matchbox/*/'
+</code></pre>
+<h3 id="testing-matchbox"><a href="#testing-matchbox" class="anchor">#</a>Testing Matchbox</h3>
+<p>Using <code>curl</code>, we can verify Matchbox&rsquo;s running state:</p>
+<pre><code class="language-tmate">  curl http://$LOAD_BALANCER_IP:8080
+</code></pre>
+<p>To test matchbox, we&rsquo;ll create an invalid userdata configuration for Talos, saving as <code>userdata.txt</code>:</p>
+<pre><code class="language-text">#!talos
+</code></pre>
+<p>Feel free to use a valid one.</p>
+<p>Now let&rsquo;s talk to Equinix Metal to create a server pointing to the Matchbox server:</p>
+<pre><code class="language-tmate">   packet-cli device create \
+    --hostname talos-pxe-boot-test-1 \
+    --plan c1.small.x86 \
+    --facility sjc1 \
+    --operating-system custom_ipxe \
+    --project-id &quot;$PACKET_PROJECT_ID&quot; \
+    --ipxe-script-url &quot;http://$LOAD_BALANCER_IP:8080/ipxe?arch=amd64&quot; \
+    --userdata-file=./userdata.txt
+</code></pre>
+<p>In the meanwhile, we can watch the logs to see how things are:</p>
+<pre><code class="language-tmate">  kubectl -n matchbox logs deployment/matchbox -f --tail=100
+</code></pre>
+<p>Looking at the logs, there should be some get requests of resources that will be used to boot the OS.</p>
+<p>Notes:</p>
+<ul>
+<li>fun fact: you can run Matchbox on Android using <a href="https://f-droid.org/en/packages/com.termux/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Termux</a>
+.</li>
+</ul>
+<h2 id="the-cluster"><a href="#the-cluster" class="anchor">#</a>The cluster</h2>
+<h3 id="preparing-the-cluster"><a href="#preparing-the-cluster" class="anchor">#</a>Preparing the cluster</h3>
+<p>Here we will declare the template that we will shortly generate our usable cluster from:</p>
+<pre><code class="language-yaml">  kind: TalosControlPlane
+  apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+  metadata:
+    name: &quot;${CLUSTER_NAME}-control-plane&quot;
+  spec:
+    version: ${KUBERNETES_VERSION}
+    replicas: ${CONTROL_PLANE_MACHINE_COUNT}
+    infrastructureTemplate:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+      kind: PacketMachineTemplate
+      name: &quot;${CLUSTER_NAME}-control-plane&quot;
+    controlPlaneConfig:
+      init:
+        generateType: init
+        configPatches:
+          - op: replace
+            path: /machine/install
+            value:
+              disk: /dev/sda
+              image: ghcr.io/talos-systems/installer:v0.8.1
+              bootloader: true
+              wipe: false
+              force: false
+          - op: add
+            path: /machine/kubelet/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/apiServer/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/controllerManager/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/extraManifests
+            value:
+            - https://github.com/packethost/packet-ccm/releases/download/v1.1.0/deployment.yaml
+          - op: add
+            path: /cluster/allowSchedulingOnMasters
+            value: true
+      controlplane:
+        generateType: controlplane
+        configPatches:
+          - op: replace
+            path: /machine/install
+            value:
+              disk: /dev/sda
+              image: ghcr.io/talos-systems/installer:v0.8.1
+              bootloader: true
+              wipe: false
+              force: false
+          - op: add
+            path: /machine/kubelet/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/apiServer/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/controllerManager/extraArgs
+            value:
+              cloud-provider: external
+          - op: add
+            path: /cluster/allowSchedulingOnMasters
+            value: true
+  ---
+  apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+  kind: PacketMachineTemplate
+  metadata:
+    name: &quot;${CLUSTER_NAME}-control-plane&quot;
+  spec:
+    template:
+      spec:
+        OS: custom_ipxe
+        ipxeURL: &quot;http://${IPXE_SERVER_IP}:8080/ipxe?arch=amd64&quot;
+        billingCycle: hourly
+        machineType: &quot;${CONTROLPLANE_NODE_TYPE}&quot;
+        sshKeys:
+          - &quot;${SSH_KEY}&quot;
+        tags: []
+  ---
+  apiVersion: cluster.x-k8s.io/v1alpha3
+  kind: Cluster
+  metadata:
+    name: &quot;${CLUSTER_NAME}&quot;
+  spec:
+    clusterNetwork:
+      pods:
+        cidrBlocks:
+          - ${POD_CIDR:=192.168.0.0/16}
+      services:
+        cidrBlocks:
+          - ${SERVICE_CIDR:=172.26.0.0/16}
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+      kind: PacketCluster
+      name: &quot;${CLUSTER_NAME}&quot;
+    controlPlaneRef:
+      apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+      kind: TalosControlPlane
+      name: &quot;${CLUSTER_NAME}-control-plane&quot;
+  ---
+  apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+  kind: PacketCluster
+  metadata:
+    name: &quot;${CLUSTER_NAME}&quot;
+  spec:
+    projectID: &quot;${PACKET_PROJECT_ID}&quot;
+    facility: &quot;${FACILITY}&quot;
+  ---
+  apiVersion: cluster.x-k8s.io/v1alpha3
+  kind: MachineDeployment
+  metadata:
+    name: ${CLUSTER_NAME}-worker-a
+    labels:
+      cluster.x-k8s.io/cluster-name: ${CLUSTER_NAME}
+      pool: worker-a
+  spec:
+    replicas: ${WORKER_MACHINE_COUNT}
+    clusterName: ${CLUSTER_NAME}
+    selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: ${CLUSTER_NAME}
+        pool: worker-a
+    template:
+      metadata:
+        labels:
+          cluster.x-k8s.io/cluster-name: ${CLUSTER_NAME}
+          pool: worker-a
+      spec:
+        version: ${KUBERNETES_VERSION}
+        clusterName: ${CLUSTER_NAME}
+        bootstrap:
+          configRef:
+            name: ${CLUSTER_NAME}-worker-a
+            apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+            kind: TalosConfigTemplate
+        infrastructureRef:
+          name: ${CLUSTER_NAME}-worker-a
+          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+          kind: PacketMachineTemplate
+  ---
+  apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+  kind: PacketMachineTemplate
+  metadata:
+    name: ${CLUSTER_NAME}-worker-a
+  spec:
+    template:
+      spec:
+        OS: custom_ipxe
+        ipxeURL: &quot;http://${IPXE_SERVER_IP}:8080/ipxe?arch=amd64&quot;
+        billingCycle: hourly
+        machineType: &quot;${WORKER_NODE_TYPE}&quot;
+        sshKeys:
+          - &quot;${SSH_KEY}&quot;
+        tags: []
+  ---
+  apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+  kind: TalosConfigTemplate
+  metadata:
+    name: ${CLUSTER_NAME}-worker-a
+    labels:
+      cluster.x-k8s.io/cluster-name: ${CLUSTER_NAME}
+  spec:
+    template:
+      spec:
+        generateType: init
+</code></pre>
+<p>Inside of <code>TalosControlPlane.spec.controlPlaneConfig.init</code>, I&rsquo;m very much liking the use of <code>generateType: init</code> paired with <code>configPatches</code>. This enables:</p>
+<ul>
+<li>configuration to be generated;</li>
+<li>management of certificates out of the cluster operator&rsquo;s hands;</li>
+<li>another level of standardisation; and</li>
+<li>overrides to be added where needed</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>the ClusterAPI template above uses Packet-Cloud-Controller manager version 1.1.0</li>
+</ul>
+<h4 id="templating-your-configuration"><a href="#templating-your-configuration" class="anchor">#</a>Templating your configuration</h4>
+<p>Set environment variables for configuration:</p>
+<p><a id="code-snippet--cluster-config-env"></a></p>
+<pre><code class="language-bash">    export CLUSTER_NAME=&quot;talos-metal&quot;
+  export FACILITY=sjc1
+  export KUBERNETES_VERSION=v1.20.2
+  export POD_CIDR=10.244.0.0/16
+  export SERVICE_CIDR=10.96.0.0/12
+  export CONTROLPLANE_NODE_TYPE=c1.small.x86
+  export CONTROL_PLANE_MACHINE_COUNT=3
+  export WORKER_NODE_TYPE=c1.small.x86
+  export WORKER_MACHINE_COUNT=0
+  export SSH_KEY=&quot;&quot;
+  export IPXE_URL=$LOAD_BALANCER_IP
+</code></pre>
+<p>In the variables above, we will create a cluster which has three small controlPlane nodes to run workloads.</p>
+<h4 id="render-the-manifests"><a href="#render-the-manifests" class="anchor">#</a>Render the manifests</h4>
+<p>Render your cluster configuration from the template:</p>
+<pre><code class="language-tmate">  clusterctl config cluster &quot;$CLUSTER_NAME&quot; \
+    --from ./talos-packet-cluster-template.yaml \
+    -n &quot;$CLUSTER_NAME&quot; &gt; &quot;$CLUSTER_NAME&quot;-cluster-capi.yaml
+</code></pre>
+<h3 id="creating-the-cluster"><a href="#creating-the-cluster" class="anchor">#</a>Creating the cluster</h3>
+<p>With the template for the cluster rendered to how wish to deploy it, it&rsquo;s now time to apply it:</p>
+<pre><code class="language-tmate">  kubectl create ns &quot;$CLUSTER_NAME&quot;
+  kubectl -n &quot;$CLUSTER_NAME&quot; apply -f ./&quot;$CLUSTER_NAME&quot;-cluster-capi.yaml
+</code></pre>
+<p>The cluster will now be brought up, we can see the progress by taking a look at the resources:</p>
+<pre><code class="language-tmate">  kubectl -n &quot;$CLUSTER_NAME&quot; get machines,clusters,packetmachines,packetclusters
+</code></pre>
+<p>Note: As expected, the cluster may take some time to appear and be accessible.</p>
+<p>Not long after applying, a KubeConfig is available. Fetch the KubeConfig from the existing cluster with:</p>
+<pre><code class="language-tmate">  kubectl -n &quot;$CLUSTER_NAME&quot; get secrets \
+    &quot;$CLUSTER_NAME&quot;-kubeconfig -o=jsonpath='{.data.value}' \
+    | base64 -d &gt; $HOME/.kube/&quot;$CLUSTER_NAME&quot;
+</code></pre>
+<p>Using the KubeConfig from the new cluster, check out the status of it:</p>
+<pre><code class="language-tmate">  kubectl --kubeconfig $HOME/.kube/&quot;$CLUSTER_NAME&quot; cluster-info
+</code></pre>
+<p>Once the APIServer is reachable, create configuration for how the Packet-Cloud-Controller-Manager should talk to Equinix-Metal:</p>
+<pre><code class="language-tmate">  kubectl --kubeconfig $HOME/.kube/&quot;$CLUSTER_NAME&quot; -n kube-system \
+    create secret generic packet-cloud-config \
+    --from-literal=cloud-sa.json=&quot;{\&quot;apiKey\&quot;: \&quot;${PACKET_API_KEY}\&quot;,\&quot;projectID\&quot;: \&quot;${PACKET_PROJECT_ID}\&quot;}&quot;
+</code></pre>
+<p>Since we&rsquo;re able to talk to the APIServer, we can check how all Pods are doing:</p>
+<p><a id="code-snippet--list all Pods"></a></p>
+<pre><code class="language-bash">    export CLUSTER_NAME=&quot;talos-metal&quot;
+  kubectl --kubeconfig $HOME/.kube/&quot;$CLUSTER_NAME&quot;\
+    -n kube-system get pods
+</code></pre>
+<p>Listing Pods shows that everything is live and in a good state:</p>
+<pre><code class="language-bash">NAMESPACE     NAME                                                     READY   STATUS    RESTARTS   AGE
+kube-system   coredns-5b55f9f688-fb2cb                                 1/1     Running   0          25m
+kube-system   coredns-5b55f9f688-qsvg5                                 1/1     Running   0          25m
+kube-system   kube-apiserver-665px                                     1/1     Running   0          19m
+kube-system   kube-apiserver-mz68q                                     1/1     Running   0          19m
+kube-system   kube-apiserver-qfklt                                     1/1     Running   2          19m
+kube-system   kube-controller-manager-6grxd                            1/1     Running   0          19m
+kube-system   kube-controller-manager-cf76h                            1/1     Running   0          19m
+kube-system   kube-controller-manager-dsmgf                            1/1     Running   0          19m
+kube-system   kube-flannel-brdxw                                       1/1     Running   0          24m
+kube-system   kube-flannel-dm85d                                       1/1     Running   0          24m
+kube-system   kube-flannel-sg6k9                                       1/1     Running   0          24m
+kube-system   kube-proxy-flx59                                         1/1     Running   0          24m
+kube-system   kube-proxy-gbn4l                                         1/1     Running   0          24m
+kube-system   kube-proxy-ns84v                                         1/1     Running   0          24m
+kube-system   kube-scheduler-4qhjw                                     1/1     Running   0          19m
+kube-system   kube-scheduler-kbm5z                                     1/1     Running   0          19m
+kube-system   kube-scheduler-klsmp                                     1/1     Running   0          19m
+kube-system   packet-cloud-controller-manager-77cd8c9c7c-cdzfv         1/1     Running   0          20m
+kube-system   pod-checkpointer-4szh6                                   1/1     Running   0          19m
+kube-system   pod-checkpointer-4szh6-talos-metal-control-plane-j29lb   1/1     Running   0          19m
+kube-system   pod-checkpointer-k7w8h                                   1/1     Running   0          19m
+kube-system   pod-checkpointer-k7w8h-talos-metal-control-plane-lk9f2   1/1     Running   0          19m
+kube-system   pod-checkpointer-m5wrh                                   1/1     Running   0          19m
+kube-system   pod-checkpointer-m5wrh-talos-metal-control-plane-h9v4j   1/1     Running   0          19m
+</code></pre>
+<p>With the cluster live, it&rsquo;s now ready for workloads to be deployed!</p>
+<h2 id="talos-configuration"><a href="#talos-configuration" class="anchor">#</a>Talos Configuration</h2>
+<p>In order to manage Talos Nodes outside of Kubernetes, we need to create and set up configuration to use.</p>
+<p>Create the directory for the config:</p>
+<pre><code class="language-tmate">  mkdir -p $HOME/.talos
+</code></pre>
+<p>Discover the IP for the first controlPlane:</p>
+<pre><code class="language-tmate">  export TALOS_ENDPOINT=$(kubectl -n &quot;$CLUSTER_NAME&quot; \
+    get machines \
+    $(kubectl -n &quot;$CLUSTER_NAME&quot; \
+      get machines -l cluster.x-k8s.io/control-plane='' \
+      --no-headers --output=jsonpath='{.items[0].metadata.name}') \
+      -o=jsonpath=&quot;{.status.addresses[?(@.type=='ExternalIP')].address}&quot; | awk '{print $2}')
+</code></pre>
+<p>Fetch the <code>talosconfig</code> from the existing cluster:</p>
+<pre><code class="language-tmate">  kubectl get talosconfig \
+    -n $CLUSTER_NAME \
+    -l cluster.x-k8s.io/cluster-name=$CLUSTER_NAME \
+    -o yaml -o jsonpath='{.items[0].status.talosConfig}' &gt; $HOME/.talos/&quot;$CLUSTER_NAME&quot;-management-plane-talosconfig.yaml
+</code></pre>
+<p>Write in the configuration the endpoint IP and node IP:</p>
+<pre><code class="language-tmate">  talosctl \
+    --talosconfig $HOME/.talos/&quot;$CLUSTER_NAME&quot;-management-plane-talosconfig.yaml \
+    config endpoint $TALOS_ENDPOINT
+  talosctl \
+    --talosconfig $HOME/.talos/&quot;$CLUSTER_NAME&quot;-management-plane-talosconfig.yaml \
+    config node $TALOS_ENDPOINT
+</code></pre>
+<p>Now that the <code>talosconfig</code> has been written, try listing all containers:</p>
+<p><a id="code-snippet--list-containers-on-containerd"></a></p>
+<pre><code class="language-bash">    export CLUSTER_NAME=&quot;talos-metal&quot;
+  # removing ip; omit ` | sed ...` for regular use
+  talosctl --talosconfig $HOME/.talos/&quot;$CLUSTER_NAME&quot;-management-plane-talosconfig.yaml containers | sed -r 's/(\b[0-9]{1,3}\.){3}[0-9]{1,3}\b'/&quot;x.x.x.x      &quot;/
+</code></pre>
+<p>Here&rsquo;s the containers running on this particular node, in containerd (not k8s related):</p>
+<pre><code class="language-bash">NODE            NAMESPACE   ID         IMAGE                                  PID    STATUS
+x.x.x.x         system      apid       talos/apid                             3046   RUNNING
+x.x.x.x         system      etcd       gcr.io/etcd-development/etcd:v3.4.14   3130   RUNNING
+x.x.x.x         system      networkd   talos/networkd                         2879   RUNNING
+x.x.x.x         system      routerd    talos/routerd                          2888   RUNNING
+x.x.x.x         system      timed      talos/timed                            2976   RUNNING
+x.x.x.x         system      trustd     talos/trustd                           3047   RUNNING
+</code></pre>
+<h2 id="clean-up"><a href="#clean-up" class="anchor">#</a>Clean up</h2>
+<p>Tearing down the entire cluster and resources associated with it, can be achieved by</p>
+<ol>
+<li>Deleting the cluster:</li>
+</ol>
+<!--listend-->
+<pre><code class="language-tmate">  kubectl -n &quot;$CLUSTER_NAME&quot; delete cluster &quot;$CLUSTER_NAME&quot;
+</code></pre>
+<p>ii. Deleting the namespace:</p>
+<pre><code class="language-tmate">  kubectl delete ns &quot;$CLUSTER_NAME&quot;
+</code></pre>
+<p>iii. Removing local configurations:</p>
+<pre><code class="language-tmate">  rm \
+    $HOME/.talos/&quot;$CLUSTER_NAME&quot;-management-plane-talosconfig.yaml \
+    $HOME/.kube/&quot;$CLUSTER_NAME&quot;
+</code></pre>
+<h2 id="what-have-i-learned-from-this"><a href="#what-have-i-learned-from-this" class="anchor">#</a>What have I learned from this?</h2>
+<dl>
+<dt>(always learning) how wonderful the Kubernetes community is</dt>
+<dd>there are so many knowledgable individuals who are so ready for collaboration and adoption - it doesn&rsquo;t matter the SIG or group.</dd>
+<dt>how modular Cluster-API is</dt>
+<dd>Cluster-API components (bootstrap, controlPlane, core, infrastructure) can be swapped out and meshed together in very cool ways.</dd>
+</dl>
+<h2 id="credits"><a href="#credits" class="anchor">#</a>Credits</h2>
+<p>Integrating Talos into this project would not be possible without help from <a href="https://github.com/andrewrynhard" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Andrew Rynhard (Talos Systems)</a>
+, huge thanks to him for reaching out for pairing and co-authoring.</p>
+<h2 id="notes-and-references"><a href="#notes-and-references" class="anchor">#</a>Notes and references</h2>
+<ul>
+<li>with the new cluster&rsquo;s controlPlane live and available for deployment, the iPXE server could be moved into that cluster - meaning that new servers boot from the cluster that they&rsquo;ll join, making it almost self-contained</li>
+<li>cluster configuration as based off of <a href="https://github.com/kubernetes-sigs/cluster-api-provider-packet/blob/479faf06e1337b1e979cb624ca8be015b2a89cde/templates/cluster-template.yaml" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>cluster-template.yaml from the cluster-api-provider-packet repo</a>
+</li>
+<li>this post has been made to <a href="https://blog.calebwoodbine.com/deploying-talos-and-kubernetes-with-cluster-api-on-equinix-metal" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>blog.calebwoodine.com</a>
+, and <a href="https://ii.coop/deploying-talos-and-kubernetes-with-cluster-api-on-equinix-metal/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>talos-system.com/blog</a>
+, but is also available as an <a href="https://github.com/ii/org/blob/master/ii/equinix-metal-capi-talos-kubernetes/README.org" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Org file</a>
+</li>
+</ul>
+<hr>
+<p>Hope you&rsquo;ve enjoyed the output of this project!
+Thank you!</p>
+
+
+            
+          </article>
+          
+
+<ul class="tags__list">
+    
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/kubernetes/">kubernetes</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/equinix/">equinix</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/talos/">talos</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/org/">org</a>
+    </li></ul>
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/bringing-the-cloud-to-your-community/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">Bringing the cloud to your community</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/grpc-learning/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >Learning Update: Introduction to gRPC</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

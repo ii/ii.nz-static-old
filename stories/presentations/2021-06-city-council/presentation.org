@@ -1,0 +1,471 @@
+# Local IspellDict: en
+#+Title: Infrastructure for Innovation
+#+SubTitle: ii.nz
+#+Author: Hippie Hacker
+#+DESCRIPTION: Presentation for Tauranga City Council
+#+REVEAL_TALK_URL: https://ii.nz
+#+KEYWORDS: ii, presentation, HTML, slide show
+* foo :noexport:
+* Haere Mai Stewards
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="4000" class="align-left"
+  :END:
+#+ATTR_REVEAL: :frag roll-in
+- of the land :: Tangata Whenua
+#+ATTR_REVEAL: :frag roll-in
+- of the plan :: City Council
+#+ATTR_REVEAL: :frag roll-in
+- of the cloud :: iiiii
+#+begin_notes
+Thank you to our stewards:
+
+- te Rangi Marae :: of the land
+- Our Council :: of the plan
+- The team at ii :: of the cloud
+#+end_notes
+* Now for the Future
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="5000" class="align-left"
+  :END:
+#+ATTR_REVEAL: :frag roll-in
+- upgraded digital :: systems, security, performance
+#+ATTR_REVEAL: :frag roll-in
+- local talent :: less money leaving Tauranga
+#+ATTR_REVEAL: :frag roll-in
+- international ecosystem :: free software blueprints
+#+begin_notes
+New Zealand is well positions to leverage publically available open solutions by employing local talent that can modify them to meet our needs.
+#+end_notes
+* Hippie's Free Software : $5
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="5000" class="align-left"
+  :END:
+#+ATTR_REVEAL: :frag roll-in
+- 30 years ago :: distributed Free Software
+#+ATTR_REVEAL: :frag roll-in
+- Provided value :: as a student
+#+ATTR_REVEAL: :frag roll-in
+- Open Blueprints :: encouraged to share and change
+#+ATTR_REVEAL: :frag roll-in
+- Paid to Learn :: while contributing value
+#+begin_notes
+I sold my first software distribution to the public over 30 years ago.
+
+The CDs I sold were based on open blueprints I downloaded for free from the internet.
+
+I walked around the "First Saturday" hacker's market held under a highway overpass yelling: "Free Software, $5!"
+
+Sometimes folks would come up and whisper (do you have any Microsoft Windows?), to which I'd reply:
+
+Bill hasen't give permission distribute or modify his software.
+However Linus and Richard encourage me to modify and pass on their blueprints without asking permission.
+
+I was able to make about $300 that weekend.
+#+end_notes
+* Firm Foundations
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="4000" class="align-left"
+  :END:
+  Many years later, a Global Advisor:
+#+ATTR_REVEAL: :frag roll-in
+- [[https://cncf.io][Cloud Native Compute Foundation]] :: [[https://catalystcloud.nz][Catalyst]] provides Certified Kubernetes
+#+ATTR_REVEAL: :frag roll-in
+- [[https://lfph.io][LF Public Health]] :: NZ COVID App uses [[https://en.wikipedia.org/wiki/Exposure_Notification][GAEN]]
+#+ATTR_REVEAL: :frag roll-in
+- [[https://fsf.org][Free Software Foundation]] :: Public Money? Public Code!
+#+begin_notes
+Everyone in this room has used software from the these Foundations.
+
+My mentor Dan Kohn, created the Open Heath Foundation to help public health authorities use open source software to fight COVID-19. He helped coordinate Google and Apple to create the exposure framework used by most of the world. I'm proud to say that code is used within New Zealand's COVID tracing app, which is also open source.
+
+Earlier this year, they worked with the US Government to help create an Open Programmable and Secure 5G End to End stack.
+
+There is too much loss of productivity and innovation due to the absence of re-usable tools and data.
+
+I think New Zealand is well placed to go further, together by curating local talent connected to the global ecosystem of innovation.
+
+It's the reason I've spent the last 10 years of my life in New Zealand.
+#+end_notes
+* Cloud Native Compute Foundation
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="4000" class="align-left"
+  :END:
+#+html: <img class="r-stretch" src="images/cncf-members.png">
+* NZ CNCF Certified Cloud
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="9000" class="align-left"
+  :END:
+Catalyst Cloud announces CNCF certified Kubernetes platform
+#+html: <img class="r-stretch" src="images/certified-kubernetes.png">
+* Public Health - GAEN+Bluetooth
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="4000" class="align-left"
+  :END:
+#+html: <img class="r-stretch" src="images/lfph-gaen.png">
+* NZ COVID Contract Tracing
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="9000" class="align-left"
+  :END:
+[[file:images/covid-app.png]]
+
+* Public Money? Public Code!
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="5000" class="align-left"
+  :END:
+- [[https://download.fsfe.org/campaigns/pmpc/PMPC-Modernising-with-Free-Software.pdf][Modernising Public Infrastructure with Free Software]]
+#+ATTR_REVEAL: :frag roll-in
+- No artificial limits :: Meet our own needs
+#+ATTR_REVEAL: :frag roll-in
+- Invest in local talent :: Less out-of-town contractors
+* The FSFE EU Video
+  :PROPERTIES:
+  :reveal_extra_attr: class="hide-headers" data-autoslide="220000"
+  :no_reveal_extra_attr: class="hide-headers" data-background-video="videos/Public Money Public Code!.mp4" data-background-video-loop
+  :no_reveal_extra_attr: class="hide-headers" data-background-video="videos/Public Money Public Code!.mp4" data-background-video-loop data-background-video-muted
+  :END:
+  #+html: <video controls=true data-autoplay=true src="videos/Public Money Public Code!.mp4" />
+#+begin_notes
+Modernising Public Infrastructurewith Free Software
+#+end_notes
+* Street Repairs in Tauranga
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="10000"
+  :END:
+#+html: <iframe height=400 width=800 data-src="https://ii.nz/fixmystreet"></iframe>
+* Investing in our Future
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="3000" class="align-left"
+  :END:
+Our youth are the future, and will be working for council within ten years.
+#+ATTR_REVEAL: :frag roll-in
+- Tauranga Teens :: speaking overseas on cloud infrastructure
+#+ATTR_REVEAL: :frag roll-in
+- Cloud Native :: from an early age
+#+ATTR_REVEAL: :frag roll-in
+- Beyond Us Impact :: servant leaders of tomorrow
+#+begin_notes
+I'm most proud of my success mentoring and teaching local youth to be leaders and engage directly with the IT communities in which we serve.
+
+Many of them traveling or speaking internationally on advanced research topics as teenagers.
+
+
+Our youth today are inherently 'cloud native' from an early age, and the desire for 'beyond us' impact and engament might surprise us if we give them a chance.
+
+If we are going to have council employees in the next ten years that can onboard our community to these resources, we need to start now.
+
+If our students can be on-ramped to active participation in the open source culture of inclusion, transparency, and governance, they will be well prepared to lead these types of initiatives locally.
+#+end_notes
+* CNCF Support for Tauranga
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="3000" class="align-left"
+  :END:
+The CNCF has offered to help onramp NZ students:
+#+ATTR_REVEAL: :frag roll-in
+- Curriculm and Training :: to get our youth solving local problems
+#+ATTR_REVEAL: :frag roll-in
+- Certifications :: to showcase their knowledge
+#+ATTR_REVEAL: :frag roll-in
+- Conference Passes :: KubeCon and many others
+#+ATTR_REVEAL: :frag roll-in
+- Paid Internship Programs :: (Google Summer of code and others)
+* Now for the Future
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="3000" class="align-left"
+  :END:
+  The call to action is simple here:
+#+ATTR_REVEAL: :frag roll-in
+What Software does Council currently use?
+#+ATTR_REVEAL: :frag roll-in
+Can Open Source be an explicit part of the conversation?
+#+ATTR_REVEAL: :frag roll-in
+Can I be invited to those conversations?
+#+begin_notes
+I know we are all honored to have input into this ten year community collaboration plan.
+
+I'd like to point to some positive change
+
+Some of us will be experts in finance, others in physical infrastructure, mine is in the could.
+#+end_notes
+* Footnotes :noexport:
+** Hippie
+  :PROPERTIES:
+  :reveal_extra_attr: class="hide-headers" data-autoslide="2000" data-background="./images/vw-alive.png" data-background-size=500px
+  :END:
+** Hacker
+  :PROPERTIES:
+  :reveal_extra_attr: class="hide-headers" data-autoslide="9000" data-background="./images/vw-alive.png" data-background-size=200px
+  :END:
+
+** Philisophical Statment
+why.ii.nz
+#+begin_notes
+This is a philisophical statement that will take about 10 minutes to read.
+
+One of the first things we learn in a healthy community is trust, and I trust what you have said, that you will read this. It is important to me. I care deeply about transparency and inclusion in our community.
+
+If we are spending public money, we should have public blueprints.
+#+end_notes
+
+** Cross Council Collaboration
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="3000" class="align-left"
+  :END:
+Other councils likely have similar needs!
+#+ATTR_REVEAL: :frag roll-in
+- Tauranga Teens :: speaking overseas on cloud infrastructure
+#+ATTR_REVEAL: :frag roll-in
+- Cloud Native :: from an early age
+#+ATTR_REVEAL: :frag roll-in
+- Beyond Us Impact :: servant leaders of tomorrow
+#+begin_notes
+I wonder if other councils don't have similar problems?
+
+What if we collaborated them with a shared budget, but only if the solutions are open source and shared and updated continuously across the nation (and beyond).
+#+end_notes
+** Maori Proverbs
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="3000" class="align-left"
+  :END:
+#+ATTR_REVEAL: :frag roll-in
+- aroha nui :: big love
+#+ATTR_REVEAL: :frag roll-in
+- tena koe :: i see you
+#+ATTR_REVEAL: :frag roll-in
+- te rourou :: let's take our baskets
+#+ATTR_REVEAL: :frag roll-in
+- maunga teitei :: let's climb the highest mountian
+#+ATTR_REVEAL: :frag roll-in
+- mea nui :: for the most important thing
+#+begin_notes
+New Zealand is well positions to leverage publically available open solutions by employing local talent that can modify them to meet our needs.
+#+end_notes
+*** Many Eyes
+  :PROPERTIES:
+  :reveal_extra_attr: data-autoslide="4000" class="align-left"
+  :END:
+#+ATTR_REVEAL: :frag roll-in
+- Maori Proverbs :: connection and community
+#+ATTR_REVEAL: :frag roll-in
+- Now for the Future :: call to action
+#+ATTR_REVEAL: :frag roll-in
+- Open Source :: public blueprints for innovation
+#+begin_notes
+New Zealand is well positions to leverage publically available open solutions by employing local talent that can modify them to meet our needs.
+#+end_notes
+**** embedding youtube videos in the background
+  :reveal_extra_attr: data-background-iframe="https://www.youtube.com/embed/h1_nyI3z8gI" data-background-interactive data-background-video-muted
+#     #+REVEAL_HTML: <video controls=true width="400" height="300" data-src="https://archive.org/download/LinusTorvaldsOnGittechTalk/LinusTorvaldsOnGittechTalk.ogv"></video>
+
+**** First Saturday
+https://www.dallasobserver.com/best-of/2005/shopping-and-services/best-place-to-pick-up-sketchy-computer-freaks-6461225
+#+begin_notes
+Started in 1969 as a get-together for ham radio enthusiasts, the sidewalk sale has had several locations, including under the Woodall Rodgers bridge between Routh Street and Central Expressway and in a parking lot on Ross Avenue.
+Under a bridge and in a parking lot?
+That's sketchy enough right there.
+Nowadays a good portion of the sale takes place at night because, according to the sidewalk sale's Web site, that is when the best "deals" often take place.
+Let's see, computer shopping at night to get the best "deals"?
+This just gets better and better.
+What's funny though, is that these guys love what they do and, as offended as they may pretend to be, they all probably like being called computer geeks when they are trying to sell the best "deal" of the night under a bridge.
+#+end_notes
+
+** Publish Me :noexport:
+#+begin_src shell
+scp README_client.html ii@ii.nz:/home/ii/public_html/index.html
+scp README.html ii@ii.nz:/home/ii/public_html/presenter.html
+# scp nz.css ii@ii.nz:/home/ii/public_html/nz.css
+rsync -a images/ ii@ii.nz:/home/ii/public_html/images/
+# rsync -a videos/ ii@ii.nz:/home/ii/public_html/videos/
+#+end_src
+
+** REVEAL_* settings
+*** Reveal init
+# Set Reveal Version if using remote version (it's autodeted if local)
+# #+REVEAL_VERSION: 4
+#+REVEAL_ROOT: https://multiplex.ii.nz
+
+Just after showNotes and before multiplex:
+#+REVEAL_EXTRA_OPTIONS: slideNumber: false, controls: true, parallaxBackgroundImage: "images/reveal-parallax-1.jpg",  parallaxBackgroundSize: "4200px 1800px"
+// Parallax background image
+  parallaxBackgroundImage: '', // e.g. "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+
+  // Parallax background size
+  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+  // Number of pixels to move the parallax background per slide
+  // - Calculated automatically unless specified
+  // - Set to 0 to disable movement along an axis
+  parallaxBackgroundHorizontal: 200,
+  parallaxBackgroundVertical: 50
+
+Just after multiplex and before dependencies
+#+REVEAL_PLUGINS: (markdown notes highlight multiplex)
+# TODO: Figure out chalkboard and other plugins
+#+NOREVEAL_ADD_PLUGIN: chalkboard RevealChalkboard https://cdn.jsdelivr.net/gh/rajgoel/reveal.js-plugins/chalkboard/plugin.js
+
+Just after optional dependencies, https://revealjs.com/config/, at the end
+# #+REVEAL_INIT_SCRIPT: slideNumber: "c/t", showSlideNumber: "speaker", overview: true, autoPlayMedia: true, autoSlide: 0, previewLinks: true
+autoSlide:
+// Controls automatic progression to the next slide
+  // - 0:      Auto-sliding only happens if the data-autoslide HTML attribute
+  //           is present on the current slide or fragment
+  // - 1+:     All slides will progress automatically at the given interval
+  // - false:  No auto-sliding, even if data-autoslide is present
+
+#+REVEAL_INIT_SCRIPT: slideNumber: "c/t", showSlideNumber: "speaker", overview: true, autoPlayMedia: true, autoSlide: false, previewLinks: true, preloadIframes: true
+# #+REVEAL_INIT_SCRIPT: slideNumber: "c/t", showSlideNumber: "speaker", overview: true, autoPlayMedia: true, autoSlide: "1+", previewLinks: true, preloadIframes: true
+# #+REVEAL_INIT_SCRIPT: slideNumber: "c/t", showSlideNumber: "speaker", overview: true, autoPlayMedia: true, autoSlide: 0, previewLinks: true
+
+*** Title Slide
+**** Title Slide Content
+# Now the title slides can be given by multiple #+REVEAL_TITLE_SLIDE option lines.
+# Please check #358 for the detail.
+#  %t for the title.
+#+REVEAL_TITLE_SLIDE: <h1>%t</h1>
+#  %s for the subtitle.
+#+REVEAL_TITLE_SLIDE: <h2>%s - %a</h2>
+# #+REVEAL_TITLE_SLIDE: <hr>
+#  %a for the author's name.
+# #+REVEAL_TITLE_SLIDE: <h3>%a</h3>
+# #+REVEAL_TITLE_SLIDE: <p>View online: <a href="%u">%u</a></p>
+#  %n for notes on the title slide (see org-re-reveal-title-slide-notes).
+#+REVEAL_TITLE_SLIDE: <summary>(Click on the blue dot</summary>
+#+REVEAL_TITLE_SLIDE: <summary>to chat anytime)</summary>
+#+REVEAL_TITLE_SLIDE: %n
+# #+REVEAL_TITLE_SLIDE: <ul><li>%A</li>
+# #+REVEAL_TITLE_SLIDE: <li>%e</li>
+# #+REVEAL_TITLE_SLIDE: <li>%q</li>
+# #+REVEAL_TITLE_SLIDE: <li>%m</li>
+#  %e for the author's email.
+#  %d for the date.
+#  %A for the author's academic title (set with #+REVEAL_ACADEMIC_TITLE).
+#  %q for the name of a file to a QR code (set with #+REVEAL_TALK_QR_CODE).
+#  %u for the URL of the presentation (set with #+REVEAL_TALK_URL).
+#  %m for misc information (set with #+REVEAL_MISCINFO).
+#  %% for a literal %.
+**** Title Slide Background
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./images/hippie+wally.png
+#+REVEAL_TITLE_SLIDE_BACKGROUND_SIZE: 500px
+#+REVEAL_TITLE_SLIDE_BACKGROUND_POSITION: bottom left
+# #+REVEAL_TITLE_SLIDE_BACKGROUND_REPEAT:
+# #+REVEAL_TITLE_SLIDE_BACKGROUND_TRANSITION:
+**** Title Slide Settings
+#+REVEAL_TITLE_SLIDE_NOTES: title-notes.org
+A bit of a hack to get data-autoslide into the title slide
+#+REVEAL_TITLE_SLIDE_TIMING: 90000
+#+REVEAL_TITLE_SLIDE_STATE: alert
+*** Timing / Autoslides
+Can be overridden per slide as a property
+#+REVEAL_TITLE_SLIDE_EXTRA_ATTR: data-autoslide=10000
+#+REVEAL_EXTRA_ATTR: data-autoslide=9000
+*** Default Background
+# #+REVEAL_DEFAULT_SLIDE_BACKGROUND:
+# #+REVEAL_DEFAULT_SLIDE_POSITION:
+# #+REVEAL_DEFAULT_SLIDE_REPEAT:
+# #+REVEAL_DEFAULT_SLIDE_TRANSITION:
+*** Multiplexer
+Sets up a _presenter.html to drive _client.html
+#+REVEAL_MULTIPLEX_ID: fafd1b8ce3f4a4d3
+#+REVEAL_MULTIPLEX_SECRET: 16233631494111650796
+#+REVEAL_MULTIPLEX_URL: https://multiplex.ii.nz/
+#+REVEAL_MULTIPLEX_SOCKETIO_URL: https://multiplex.ii.nz/socket.io/socket.io.js
+*** Extra code
+PREAMBLE is top of body
+#+REVEAL_PREAMBLE: <script async defer data-domain="ii.nz" src="https://plausible.ii.nz/js/plausible.js"></script>
+
+POSTAMBLE is after last <div>, before scripts and Reveal.initialize()
+#+REVEAL_POSTAMBLE: <script>console.log("Hello from REVEAL_POSTAMBLE")</script>
+
+EXTRA_SCRIPTS is another way to sideload javascript (can also be files)
+#+REVEAL_EXTRA_SCRIPTS: ("<script> (function(d,t) {var BASE_URL='https://chat.ii.nz'; var g=d.createElement(t),s=d.getElementsByTagName(t)[0]; g.src=BASE_URL+'/packs/js/sdk.js'; s.parentNode.insertBefore(g,s); g.onload=function(){window.chatwootSDK.run({websiteToken: 'hBN61FL3jSpG2ovnML1Xqxzq', baseUrl: BASE_URL})}})(document,'script'); </script>")
+
+# Export with ~?print-pdf~ after ~.html~ see https://revealjs.com/pdf-export
+
+*** More
+#+NOREVEAL_DEFAULT_FRAG_STYLE: YY
+#+NOREVEAL_EXTRA_CSS: YY
+#+NOREVEAL_EXTRA_JS: Y
+#+REVEAL_HLEVEL: 1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_SLIDE_NUMBER: ""
+# Transition Speed
+#+REVEAL_SPEED: 0.25
+# Not quite working yet
+# #+REVEAL_HIGHLIGHT_CSS: 'zenburn
+# #+REVEAL_HIGHLIGHT_CSS: 'monokai
+#+REVEAL_THEME: black
+#+REVEAL_THEME_OPTIONS: beige|black|blood|league|moon|night|serif|simple|sky|solarized|white
+#+REVEAL_TRANS: fade
+#+REVEAL_TRANS_OPTIONS: none|cube|fade|concave|convex|page|slide|zoom
+# #+REVEAL_WIDTH: 1000
+# #+REVEAL_HEIGHT: 600
+#+REVEAL_MAX_SCALE: 3.5
+#+REVEAL_MIN_SCALE: 1
+# #+REVEAL_POSTAMBLE: <p> Based on work by ii. </p>
+#+REVEAL_EXTRA_CSS: ./nz.css
+#+REVEAL_ACADEMIC_TITLE: Mr.
+#+REVEAL_TALK_QR_CODE: https:/ii.nz
+#+REVEAL_MISCINFO: FooBarBaz
+#+REVEAL_EXPORT_NOTES_TO_PDF: separate-page
+** #+OPTIONS:
+# #+OPTIONS: reveal_height:1000
+# #+OPTIONS: reveal_width:1400
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: mathjax:Y
+#+OPTIONS: reveal_single_file:nil
+#+OPTIONS: reveal_control:t
+#+OPTIONS: reveal_progress:t
+#+OPTIONS: reveal_history:t
+# #+OPTIONS: reveal_history:nil
+#+OPTIONS: reveal_center:t
+#+OPTIONS: reveal_rolling_links:nil
+#+OPTIONS: reveal_keyboard:t
+#+OPTIONS: reveal_overview:t
+#+OPTIONS: reveal_klipsify_src:t
+#+OPTIONS: reveal_generate_ids:t
+#+OPTIONS: reveal_fragmentinurl:t
+#+OPTIONS: reveal_totaltime:600
+
+# #+html:
+
+** Drop the presentation in-place
+#+begin_src shell :results silent
+mv README_client.html $HOME/public_html/index.html
+mv README.html $HOME/public_html/presenter.html
+#+end_src
+
+** Get a token
+#+begin_src shell
+curl -s https://multiplex.ii.nz/token | jq .
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "secret": "16233631494111650796",
+  "socketId": "fafd1b8ce3f4a4d3"
+}
+#+end_example
+
+*** Cache fix my street
+#+begin_src shell
+rm -rf ~/public_html/fixmystreet
+cd ~/public_html
+mkdir fixmystreet
+cd fixmystreet
+wget -rkp -l3 -np -nH --cut-dirs=1 https://fixmystreet.org.nz/council/tauranga-city
+cd fixmystreet
+mv tauranga-city index.html
+#+end_src
+
+#+RESULTS:
+#+begin_example
+#+end_example
+
+** Local vars
+
+# Local Variables:
+# no-org-re-reveal-title-slide-notes: NOTES\.txt
+# org-re-reveal-defaulttiming: 20
+# org-re-reveal-totaltime: 600
+# End:

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on ii.nz</title>
+    <link>https://ii.nz/tags/</link>
+    <description>Recent content in Tags on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>containers</title>
+      <link>https://ii.nz/tags/containers/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>discoveries</title>
+      <link>https://ii.nz/tags/discoveries/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/discoveries/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>envoy</title>
+      <link>https://ii.nz/tags/envoy/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/envoy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oci</title>
+      <link>https://ii.nz/tags/oci/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/oci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>equinix</title>
+      <link>https://ii.nz/tags/equinix/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/equinix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://ii.nz/tags/kubernetes/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>org</title>
+      <link>https://ii.nz/tags/org/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/org/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>talos</title>
+      <link>https://ii.nz/tags/talos/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/talos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud</title>
+      <link>https://ii.nz/tags/cloud/</link>
+      <pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/tags/cloud/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

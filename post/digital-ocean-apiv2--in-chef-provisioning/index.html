@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Digital Ocean APIv2  in chef-provisioning | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/digital-ocean-apiv2--in-chef-provisioning\/",
+      "name": "Digital Ocean APIv2  in chef-provisioning",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">Digital Ocean APIv2  in chef-provisioning</h1>
+              📆<time datetime="2015-10-30 00:00:00 &#43;0000 UTC" class="post__date">Oct 30 2015</time> 
+              <span class="post__date">🕚 1 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/hippie-hacker>
+                  Hippie Hacker
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<p>Digital Ocean is <a href="https://developers.digitalocean.com/documentation/changelog/api-v1/sunsetting-api-v1/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>sunsetting api v1</a>
+ on November 9th. It&rsquo;s taken a while, but @geemus <a href="https://github.com/fog/fog/issues/3419#issuecomment-149700617" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>released support in fog v1.35.0</a>
+</p>
+<p>I was able to take that work and <a href="https://github.com/chef/chef-provisioning-fog/issues/119#issuecomment-152188977" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>update chef-provisioning-fog</a>
+ which we can now use to chef-provision on digital ocean after next week.</p>
+<p>The branch is at <a href="https://github.com/ii/chef-provisioning-fog/tree/do_api_v2" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>ii/chef-provisioning-fog apiv2</a>
+</p>
+<p>Run <code>chef-client -z my_do_server.rb</code> on the following ruby:</p>
+<pre><code class="language-ruby">with_driver 'fog:DigitalOcean', compute_options: {
+                 digitalocean_token: ENV['DOTOKEN']
+#                 digitalocean_api_key: 'V1_DEPRECATED',
+#                 digitalocean_client_id: 'V1_DEPRECATED',
+               }
+# Adding compute_options here seems broken ^^^^
+# so make sure and add driver_options to knife.rb
+
+# put this in knife.rb
+#knife[:digital_ocean_access_token] = ENV['DOTOKEN']
+#driver_options compute_options: {digitalocean_token: ENV['DOTOKEN']}
+
+with_machine_options bootstrap_options: {
+                       image_distribution: 'Ubuntu',
+                       image_name: '14.04 x64',
+                       region_name: 'New York 3',
+                       flavor_name: '2GB'
+                       tags: {
+                         'ii' =&gt; 'lovesyou'
+                       },
+                     }
+
+with_chef_server 'https://api.chef.io/organizations/ii',
+                 :client_name =&gt; Chef::Config[:node_name],
+                 :signing_key_filename =&gt; Chef::Config[:client_key]
+
+machine 'do.ii.delivery'
+</code></pre>
+
+
+            
+          </article>
+          
+
+ <div class="pagination">
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/rpi-zero-gadget-support/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >RPi Zero Gadget Support</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

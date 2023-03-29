@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on ii.nz</title>
+    <link>https://ii.nz/categories/</link>
+    <description>Recent content in Categories on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Tue, 24 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>learning</title>
+      <link>https://ii.nz/categories/learning/</link>
+      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/categories/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://ii.nz/categories/kubernetes/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/categories/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>discoveries</title>
+      <link>https://ii.nz/categories/discoveries/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/categories/discoveries/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>guides</title>
+      <link>https://ii.nz/categories/guides/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/categories/guides/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>general</title>
+      <link>https://ii.nz/categories/general/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/categories/general/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

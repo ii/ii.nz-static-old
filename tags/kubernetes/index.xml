@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on ii.nz</title>
+    <link>https://ii.nz/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying Talos to Equinix</title>
+      <link>https://ii.nz/post/deplying-talos-to-equinix/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/deplying-talos-to-equinix/</guid>
+      <description>From nodes to workloads on baremetal</description>
+    </item>
+    
+    <item>
+      <title>Bringing the cloud to your community</title>
+      <link>https://ii.nz/post/bringing-the-cloud-to-your-community/</link>
+      <pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/bringing-the-cloud-to-your-community/</guid>
+      <description>Creating local clouds should not be hard</description>
+    </item>
+    
+    <item>
+      <title>Flashing hardware with software from the web</title>
+      <link>https://ii.nz/post/flashing-hardware-with-software-from-the-web/</link>
+      <pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/flashing-hardware-with-software-from-the-web/</guid>
+      <description>It&amp;rsquo;s possible to flash hardware from the web</description>
+    </item>
+    
+  </channel>
+</rss>

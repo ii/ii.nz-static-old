@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>xDS Conformance Project | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/xds-conformance-project\/",
+      "name": "xDS Conformance Project",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">xDS Conformance Project</h1>
+              📆<time datetime="2021-12-09 00:00:00 &#43;0000 UTC" class="post__date">Dec 9 2021</time> 
+              <span class="post__date">🕚 9 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/zach-mandeville>
+                  Zach Mandeville
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<h1 id="introduction">Introduction</h1>
+<p>I&rsquo;ve had the privilege to spend the majority of this year working to develop an <a href="https://github.com/ii/xds-test-harness" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>xDS conformance test suite</a>
+. While this project is most definitely still in its infancy, the work is already rewarding and points to tremendous potential. Today, I wanted to introduce the conformance project and its goals, the ways we&rsquo;ve approached the project, and the exciting progress made so far.</p>
+<h1 id="what-is-xds">What is xDS?</h1>
+<p>xDS, or extensible discovery service, is a set of APIs pioneered by <a href="https://envoyproxy.io" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Envoy</a>
+. They allow for what is described as a <a href="https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>“Universal Data Plane API”</a>
+. In the example of Envoy, xDS allows a group to build their own control plane that, as long as it implements the relatively basic set of discovery services, can dynamically update all aspects of their Envoy service mesh. It is an idea that allows for a great amount of freedom and variety when working with Envoy, but has use cases beyond this proxy.</p>
+<p>For this reason, the conformance project is not a test suite for Envoy, but for the xDS protocol itself, specifically the transport layer. It is a set of testable behaviours for how resources are exchanged in an xDS api, without specifying the kinds of resources or the context in which they&rsquo;re exchanged. This will let us set up a rich, consistent definition of xDS so it can continue to extend, adapt, and grow to its full potential.</p>
+<h1 id="some-initial-technical-goals">Some initial technical goals</h1>
+<p>The conformance framework is intended as a single binary, and set of tests, that can be easily downloaded and run against someone’s xDS implementation. We decided to write the framework in Go due to its popularity in the community, the simplicity of its language, and its superb support for concurrency– as concurrency was central to the planned design of the framework.</p>
+<p>One of the goals of this project was to help build understanding of the protocol itself, to establish for the first time what ’conformant behaviour’ means within xDS. These APIs are young, and handle a lot of complex tasks within an already complex domain. While the documentation for Envoy is great, and growing, there is still a lot of undocumented behaviour, where the only way to understand how something <em>should</em> be working is to deduce it from the source code. From the beginning, we wanted both the framework and tests to be written as simply as possible, so they could articulate conformance as clearly and plainly as possible.</p>
+<h1 id="our-test-case-syntax">Our Test case syntax</h1>
+<p>For testing, it is hard to find a more plain-spoken and articulate syntax than <a href="https://cucumber.io/docs/gherkin/reference/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Gherkin</a>
+, which is why we chose it for the conformance framework. Gherkin uses natural language, plus a small amount of keywords, so that the tests act as a shared language between stakeholders and developers. The first stage of the project was just to come up with a set of sample tests, just through meetings and a shared google doc.  It made me quite happy to be able to take these sample test cases and transpose them, nearly verbatim, into executable tests.</p>
+<p>Gherkin is only a testing syntax and does not handle the testing functionality. For that, we use the <a href="https://github.com/cucumber/godog" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Godog library</a>
+. Godog converts Gherkin into  regex patterns that map to functions. One of the awesome benefits of this is that, if you are intentional and clever with how you write test cases, you can re-use functions across tests.  This minimizes the amount of code you must write and maintain, while providing a consistent rhythm and readability to the tests.</p>
+<h2 id="an-example"><a href="#an-example" class="anchor">#</a>An example</h2>
+<p>For example, one of the behaviours we wanted to test is wildcard subscriptions. With xDS generally, a client will request specific resources from a server, and if those resources exist, they should be included in the server&rsquo;s response. However, the listener and cluster discovery services (LDS and CDS, respectively) allow for wildcard subscriptions, where a client can receive all resources for the service without having to specifically name them in their subscription request.</p>
+<p>In the original test case document, this scenario was described as so:</p>
+<blockquote>
+<p>Server has resources A, B, and C. Client subscribes to wildcard. Server should send a response containing all three resources with some initial version and a nonce. Client sends an ACK with that version and nonce.</p>
+</blockquote>
+<p>This was translated into a test case as:</p>
+<pre><code>Scenario Outline: The service should send all resources on a wildcard request.
+    Given a target setup with &lt;service&gt;, &lt;resources&gt;, and &lt;starting version&gt;
+    When the Client does a wildcard subscription to &lt;service&gt;
+    Then the Client receives the &lt;expected resources&gt; and &lt;starting version&gt;
+    And the Client sends an ACK to which the &lt;service&gt; does not respond
+</code></pre>
+<p>Each line then maps to a function in our test runner.  The <code>&lt;words&gt;</code> in the above lines represent example terms, which lets us provide an example table to this test. Godogs will run the test for each example given in the table, replacing each <code>&lt;word&gt;</code> with the row&rsquo;s respective column.</p>
+<p>In other words, we can run the same test for two different services by simply adding this table beneath the test:</p>
+<pre><code>Examples:
+     | service | starting version | resources | expected resources |
+     | &quot;CDS&quot;   | &quot;1&quot;              | &quot;A,B,C&quot;   | &quot;C,A,B&quot;            |
+     | &quot;LDS&quot;   | &quot;1&quot;              | &quot;D,E,F&quot;   | &quot;F,D,E&quot;            |
+</code></pre>
+<p>After testing wildcard subscriptions, we wanted to test  subscription updates. If a client does a wildcard subscription, and any of the service resources change, then the server should send an updated response, without prompting, to the client.</p>
+<p>This test, as described, follows a similar pattern as the first one: there is an initial state, actions occur, and they trigger expected responses.  Since they share a pattern, the tests can share code.</p>
+<p>We were able to write this second test as:</p>
+<pre><code>Scenario Outline: The service should send updates to the client
+  Given a target setup with &lt;service&gt;, &lt;resources&gt;, and &lt;starting version&gt;
+  When the Client does a wildcard subscription to &lt;service&gt;
+  Then the Client receives the &lt;expected resources&gt; and &lt;starting version&gt;
+  When a &lt;chosen resource&gt; of the &lt;service&gt; is updated to the &lt;next version&gt;
+  Then the Client receives the &lt;expected resources&gt; and &lt;next version&gt;
+  And the Client sends an ACK to which the &lt;service&gt; does not respond
+</code></pre>
+<p>This test covers new behaviour across two different services, and only requires a single new function to be written (the second WHEN step). As the test framework evolves, we are finding it easier to write tests without writing any new code at all.</p>
+<h1 id="setting-up-the-test-runner">Setting up the test runner</h1>
+<p>While the tests are simple, and hopefully straightforward, it took a decent amount of work to get here. The first difficulty was that we needed a test runner that could adapt itself to each service, while being able to use the same function.  Secondly, we needed a way to write linear tests to describe interactions that were not necessarily linear.</p>
+<p>The envoy xDS APIs are built with <a href="https://grpc.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>gRPC</a>
+ using bidirectional streams. Not every request from an xDS client should get a response from the server, and the server should send certain responses to the client before they know to request them. The above test is an example of this, where an update to the state should cause the server to send a response without the client&rsquo;s prompting.</p>
+<p>We needed a way to start a service stream and investigate the various calls and responses through the changing state of the entire instance. We did this by using the concurrent patterns built in to go and through designing a service interface.</p>
+<p>Without going too heavily into code, the essential pattern for each test is this: In the beginning GIVEN step we setup the target server using an integrated adapter. In the first WHEN step we initiate an interface for the specified service. This interface is built with a set of channels, a cache for the requests and responses sent along these channels, and functions for managing the stream.</p>
+<p>We start the stream and set up a couple concurrent go routines, initiated with the service channels. These routines listen for new messages and pass them along the stream as needed, and send any responses or any errors back along their respective channels.</p>
+<p>In this way, we can adjust the state of the instance and the action of the client while maintaining an uninterrupted stream. It also allows us to observe all meaningful responses and errors that happen during the lifecycle of the stream. In each of the THEN steps, we use the cache of responses and errors to validate the behaviour and determine whether the test passed.</p>
+<p>This pattern allows for us to linearly describe non-linear behaviour, while the Service interface lets us use the same function across services.</p>
+<h1 id="integrating-the-suite-into-an-xds-implementation">Integrating the suite into an xDS implementation</h1>
+<p>Now that we had the design, we needed to verify that it could work with an actual target. A good use case for the xDS conformance suite would be to test a custom control plane implementation, to verify that its behaviour is consistent with any other Envoy control plane. And so, we built an implementation of the <a href="https://github.com/envoyproxy/go-control-plane" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>go-control-plane</a>
+, and integrated the framework’s adapter for it.</p>
+<p>Basing our implementation off the awesome example server included in the go-control-plane repo (and their integration tests) we were able to build our own example server to test the framework against.</p>
+<p>An important aspect of the framework is that it needs an adapter API to communicate state changes to the target server outside of the communication happening in the xDS services.  I was quite happy when we were able to include our adapter into our go-control-plane implementation with only a few lines of code.</p>
+<h1 id="collaborative-work">Collaborative work</h1>
+<p>We ran our framework against the example target and found that the majority of our tests passed and the ones that did not were highlighting behaviour already described in open issues in the go-control-plane repo. The framework, even in its prototype state, was working as we roughly expected.</p>
+<p>More importantly, though, this framework was helping us articulate behaviour that hadn’t been documented much outside of github issues. We’ve begun to collaborate with the maintainers of the go-control-plane so that their expertise can help strengthen our framework and its adapter, while our tests are helping define and strengthen the behaviour of this control plane. It has been a delight to collaborate on this project, where the work is simultaneously exploratory and concrete, and could help lead to improvements across multiple projects and domains.</p>
+<h1 id="where-we-go-from-here">Where we go from here</h1>
+<p>The framework is still in its earliest stages. We are still implementing the basic tests for the SoTW protocol before moving to more complex behaviours in the newer Delta protocol. I am excited to build out these tests and to run them against an increasing variety of example targets. It is exciting to see the beginnings of the framework used alongside control plane development, to help illuminate and explain the xDS protocol and to ensure our implementations are as strong as they can be!</p>
+
+
+            
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/creating-an-e2e-test-for-conformance/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">Creating an e2e test for Conformance</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/i-trust-that-you-will-read-this/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >I Trust That You Will Read This</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

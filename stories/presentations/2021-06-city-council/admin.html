@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Infrastructure for Innovation</title>
+<meta name="author" content="Hippie Hacker"/>
+<meta name="description" content="Presentation for Tauranga City Council"/>
+<meta name="keywords" content="ii, presentation, HTML, slide show"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://multiplex.ii.nz/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://multiplex.ii.nz/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./nz.css"/>
+<link rel="stylesheet" href="https://multiplex.ii.nz/plugin/highlight/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+</head>
+<body>
+<script async defer data-domain="ii.nz" src="https://plausible.ii.nz/js/plausible.js"></script>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./images/hippie+wally.png" data-background-size="500px" data-background-position="bottom left" data-state="alert" data-timing="90000">
+<h1>Infrastructure for Innovation</h1>
+<h2>ii.nz - Hippie Hacker</h2>
+<summary>(Click on the blue dot</summary>
+<summary>to chat anytime)</summary>
+<aside class="notes">
+<p>
+Don&rsquo;t forget to breath
+</p>
+<ul>
+<li>The story is this</li>
+<li>and good stuff</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section>
+<section id="slide-orgc087005" data-autoslide="4000" class="align-left">
+<h2 id="orgc087005">Haere Mai Stewards</h2>
+<dl class="fragment roll-in">
+<dt>of the land</dt><dd>Tangata Whenua</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>of the plan</dt><dd>City Council</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>of the cloud</dt><dd>iiiii</dd>
+
+</dl>
+<aside class="notes">
+<p>
+Thank you to our stewards:
+</p>
+
+<dl>
+<dt>te Rangi Marae</dt><dd>of the land</dd>
+<dt>Our Council</dt><dd>of the plan</dd>
+<dt>The team at ii</dt><dd>of the cloud</dd>
+
+</dl>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org60e9346" data-autoslide="5000" class="align-left">
+<h2 id="org60e9346">Now for the Future</h2>
+<dl class="fragment roll-in">
+<dt>upgraded digital</dt><dd>systems, security, performance</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>local talent</dt><dd>less money leaving Tauranga</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>international ecosystem</dt><dd>free software blueprints</dd>
+
+</dl>
+<aside class="notes">
+<p>
+New Zealand is well positions to leverage publically available open solutions by employing local talent that can modify them to meet our needs.
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org3f37205" data-autoslide="5000" class="align-left">
+<h2 id="org3f37205">Hippie&rsquo;s Free Software : $5</h2>
+<dl class="fragment roll-in">
+<dt>30 years ago</dt><dd>distributed Free Software</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Provided value</dt><dd>as a student</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Open Blueprints</dt><dd>encouraged to share and change</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Paid to Learn</dt><dd>while contributing value</dd>
+
+</dl>
+<aside class="notes">
+<p>
+I sold my first software distribution to the public over 30 years ago.
+</p>
+
+<p>
+The CDs I sold were based on open blueprints I downloaded for free from the internet.
+</p>
+
+<p>
+I walked around the &ldquo;First Saturday&rdquo; hacker&rsquo;s market held under a highway overpass yelling: &ldquo;Free Software, $5!&rdquo;
+</p>
+
+<p>
+Sometimes folks would come up and whisper (do you have any Microsoft Windows?), to which I&rsquo;d reply:
+</p>
+
+<p>
+Bill hasen&rsquo;t give permission distribute or modify his software.
+However Linus and Richard encourage me to modify and pass on their blueprints without asking permission.
+</p>
+
+<p>
+I was able to make about $300 that weekend.
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org402826c" data-autoslide="4000" class="align-left">
+<h2 id="org402826c">Firm Foundations</h2>
+<p>
+Many years later, a Global Advisor:
+</p>
+<dl class="fragment roll-in">
+<dt><a href="https://cncf.io">Cloud Native Compute Foundation</a></dt><dd><a href="https://catalystcloud.nz">Catalyst</a> provides Certified Kubernetes</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt><a href="https://lfph.io">LF Public Health</a></dt><dd>NZ COVID App uses <a href="https://en.wikipedia.org/wiki/Exposure_Notification">GAEN</a></dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt><a href="https://fsf.org">Free Software Foundation</a></dt><dd>Public Money? Public Code!</dd>
+
+</dl>
+<aside class="notes">
+<p>
+Everyone in this room has used software from the these Foundations.
+</p>
+
+<p>
+My mentor Dan Kohn, created the Open Heath Foundation to help public health authorities use open source software to fight COVID-19. He helped coordinate Google and Apple to create the exposure framework used by most of the world. I&rsquo;m proud to say that code is used within New Zealand&rsquo;s COVID tracing app, which is also open source.
+</p>
+
+<p>
+Earlier this year, they worked with the US Government to help create an Open Programmable and Secure 5G End to End stack.
+</p>
+
+<p>
+There is too much loss of productivity and innovation due to the absence of re-usable tools and data.
+</p>
+
+<p>
+I think New Zealand is well placed to go further, together by curating local talent connected to the global ecosystem of innovation.
+</p>
+
+<p>
+It&rsquo;s the reason I&rsquo;ve spent the last 10 years of my life in New Zealand.
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org4717628" data-autoslide="4000" class="align-left">
+<h2 id="org4717628">Cloud Native Compute Foundation</h2>
+<img class="r-stretch" src="images/cncf-members.png">
+</section>
+</section>
+<section>
+<section id="slide-org42fffd2" data-autoslide="9000" class="align-left">
+<h2 id="org42fffd2">NZ CNCF Certified Cloud</h2>
+<p>
+Catalyst Cloud announces CNCF certified Kubernetes platform
+</p>
+<img class="r-stretch" src="images/certified-kubernetes.png">
+</section>
+</section>
+<section>
+<section id="slide-org5f48180" data-autoslide="4000" class="align-left">
+<h2 id="org5f48180">Public Health - GAEN+Bluetooth</h2>
+<img class="r-stretch" src="images/lfph-gaen.png">
+</section>
+</section>
+<section>
+<section id="slide-org0d3fb50" data-autoslide="9000" class="align-left">
+<h2 id="org0d3fb50">NZ COVID Contract Tracing</h2>
+
+<div id="org325a5fc" class="figure">
+<p><img src="images/covid-app.png" alt="covid-app.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org5ef3622" data-autoslide="5000" class="align-left">
+<h2 id="org5ef3622">Public Money? Public Code!</h2>
+<ul>
+<li><a href="https://download.fsfe.org/campaigns/pmpc/PMPC-Modernising-with-Free-Software.pdf">Modernising Public Infrastructure with Free Software</a></li>
+
+</ul>
+<dl class="fragment roll-in">
+<dt>No artificial limits</dt><dd>Meet our own needs</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Invest in local talent</dt><dd>Less out-of-town contractors</dd>
+
+</dl>
+</section>
+</section>
+<section>
+<section id="slide-orgcf16838" class="hide-headers" data-autoslide="220000">
+<h2 id="orgcf16838">The FSFE EU Video</h2>
+<video controls=true data-autoplay=true src="videos/Public Money Public Code!.mp4" />
+<aside class="notes">
+<p>
+Modernising Public Infrastructurewith Free Software
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-orgf7aecf3" data-autoslide="10000">
+<h2 id="orgf7aecf3">Street Repairs in Tauranga</h2>
+<iframe height=400 width=800 data-src="https://ii.nz/fixmystreet"></iframe>
+</section>
+</section>
+<section>
+<section id="slide-orgca6eb81" data-autoslide="3000" class="align-left">
+<h2 id="orgca6eb81">Investing in our Future</h2>
+<p>
+Our youth are the future, and will be working for council within ten years.
+</p>
+<dl class="fragment roll-in">
+<dt>Tauranga Teens</dt><dd>speaking overseas on cloud infrastructure</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Cloud Native</dt><dd>from an early age</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Beyond Us Impact</dt><dd>servant leaders of tomorrow</dd>
+
+</dl>
+<aside class="notes">
+<p>
+I&rsquo;m most proud of my success mentoring and teaching local youth to be leaders and engage directly with the IT communities in which we serve.
+</p>
+
+<p>
+Many of them traveling or speaking internationally on advanced research topics as teenagers.
+</p>
+
+
+<p>
+Our youth today are inherently &rsquo;cloud native&rsquo; from an early age, and the desire for &rsquo;beyond us&rsquo; impact and engament might surprise us if we give them a chance.
+</p>
+
+<p>
+If we are going to have council employees in the next ten years that can onboard our community to these resources, we need to start now.
+</p>
+
+<p>
+If our students can be on-ramped to active participation in the open source culture of inclusion, transparency, and governance, they will be well prepared to lead these types of initiatives locally.
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-orgc81013b" data-autoslide="3000" class="align-left">
+<h2 id="orgc81013b">CNCF Support for Tauranga</h2>
+<p>
+The CNCF has offered to help onramp NZ students:
+</p>
+<dl class="fragment roll-in">
+<dt>Curriculm and Training</dt><dd>to get our youth solving local problems</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Certifications</dt><dd>to showcase their knowledge</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Conference Passes</dt><dd>KubeCon and many others</dd>
+
+</dl>
+<dl class="fragment roll-in">
+<dt>Paid Internship Programs</dt><dd>(Google Summer of code and others)</dd>
+
+</dl>
+</section>
+</section>
+<section>
+<section id="slide-orgff2e9e7" data-autoslide="3000" class="align-left">
+<h2 id="orgff2e9e7">Now for the Future</h2>
+<p>
+The call to action is simple here:
+</p>
+<p class="fragment roll-in">
+What Software does Council currently use?
+</p>
+<p class="fragment roll-in">
+Can Open Source be an explicit part of the conversation?
+</p>
+<p class="fragment roll-in">
+Can I be invited to those conversations?
+</p>
+<aside class="notes">
+<p>
+I know we are all honored to have input into this ten year community collaboration plan.
+</p>
+
+<p>
+I&rsquo;d like to point to some positive change
+</p>
+
+<p>
+Some of us will be experts in finance, others in physical infrastructure, mine is in the could.
+</p>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+<script>console.log("Hello from REVEAL_POSTAMBLE")</script>
+<script src="https://multiplex.ii.nz/dist/reveal.js"></script>
+<script src="https://multiplex.ii.nz/plugin/markdown/markdown.js"></script>
+<script src="https://multiplex.ii.nz/plugin/notes/notes.js"></script>
+<script src="https://multiplex.ii.nz/plugin/highlight/highlight.js"></script>
+<script> (function(d,t) {var BASE_URL='https://chat.ii.nz'; var g=d.createElement(t),s=d.getElementsByTagName(t)[0]; g.src=BASE_URL+'/packs/js/sdk.js'; s.parentNode.insertBefore(g,s); g.onload=function(){window.chatwootSDK.run({websiteToken: 'hBN61FL3jSpG2ovnML1Xqxzq', baseUrl: BASE_URL})}})(document,'script'); </script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: true,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 3.50,
+
+transition: 'fade',
+transitionSpeed: '0.25',
+showNotes: window.location.search.match( /print-pdf/gi ) ? 'separate-page' : false,
+slideNumber: false, controls: true, parallaxBackgroundImage: "images/reveal-parallax-1.jpg",  parallaxBackgroundSize: "4200px 1800px",
+multiplex: {
+    secret: '16233631494111650796', // null if client
+    id: 'fafd1b8ce3f4a4d3', // id, obtained from socket.io server
+    url: 'https://multiplex.ii.nz/' // Location of socket.io server
+},
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealHighlight,  ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+ { src: 'https://multiplex.ii.nz/socket.io/socket.io.js', async: true },
+ { src: 'https://multiplex.ii.nz/plugin/multiplex/master.js', async: true }]
+
+,slideNumber: "c/t", showSlideNumber: "speaker", overview: true, autoPlayMedia: true, autoSlide: false, previewLinks: true, preloadIframes: true});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

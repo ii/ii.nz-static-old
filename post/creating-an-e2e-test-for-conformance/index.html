@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Creating an e2e test for Conformance | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/creating-an-e2e-test-for-conformance\/",
+      "name": "Creating an e2e test for Conformance",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">Creating an e2e test for Conformance</h1>
+              📆<time datetime="2021-05-11 00:00:00 &#43;0000 UTC" class="post__date">May 11 2021</time> 
+              <span class="post__date">🕚 7 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/stephen-heywood>
+                  Stephen Heywood
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<h2 id="introduction"><a href="#introduction" class="anchor">#</a>Introduction</h2>
+<p>Since the 1.19 release of Kubernetes, the gap in e2e conformance tested endpoints has decreased due in part to the processes and tooling that the team at <a href="https://ii.coop/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>ii.coop</a>
+ have developed.</p>
+<p><img src="/images/2021/apisnoop-progress.png" alt="img"></p>
+<p>The process starts by using <a href="https://github.com/cncf/apisnoop" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>APIsnoop</a>
+ (which uses a postgres database containing audit logs from e2e test runs) to identify a set of untested endpoints that are part of the stable API endpoints. During this process various groups or patterns of endpoints are discovered. One such group of endpoints are “DaemonSetStatus”. Next we will explore these endpoints, create an e2e test that exercises each of them, then merge this test into the k8s repo.</p>
+<p>APIsnoop results for untested “DaemonSetStatus” endpoints in <a href="https://github.com/cncf/apisnoop/blob/main/apps/snoopdb/tables-views-functions.org#untested_stable_endpoints" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>untested_stable_endpoints table</a>
+</p>
+<pre><code class="language-sql">  select
+    endpoint,
+    path,
+    kind
+  from testing.untested_stable_endpoint
+  where eligible is true
+  and endpoint ilike '%DaemonSetStatus'
+  order by kind, endpoint desc;
+</code></pre>
+<pre><code>                endpoint                  |                           path                                |    kind
+------------------------------------------+---------------------------------------------------------------+------------
+   replaceAppsV1NamespacedDaemonSetStatus | /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status | DaemonSet
+   readAppsV1NamespacedDaemonSetStatus    | /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status | DaemonSet
+   patchAppsV1NamespacedDaemonSetStatus   | /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status | DaemonSet
+  (3 rows)
+</code></pre>
+<h1 id="connecting-an-endpoint-to-a-resource">Connecting an endpoint to a resource</h1>
+<p>Here are three possible ways use to connect an API endpoint to a resource in a cluster</p>
+<ol>
+<li>
+<p>Some initial details about the endpoint can be found via the <a href="https://kubernetes.io/docs/reference/kubernetes-api/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>API Reference</a>
+. For this example about Daemonset we can locate <a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#get-read-status-of-the-specified-daemonset" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>read</a>
+, <a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#patch-partially-update-status-of-the-specified-daemonset" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>patch</a>
+ and <a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#update-replace-status-of-the-specified-daemonset" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>replace</a>
+ for Daemonset Status.</p>
+</li>
+<li>
+<p><code>kubectl</code> has an option to describe the fields associated with each supported API resource. The following example shows how it can provide details around ’status conditions’.</p>
+<pre><code>   $ kubectl explain daemonset.status.conditions
+   KIND:     DaemonSet
+   VERSION:  apps/v1
+
+   RESOURCE: conditions &lt;[]Object&gt;
+
+   DESCRIPTION:
+        Represents the latest available observations of a DaemonSet's current
+        state.
+
+        DaemonSetCondition describes the state of a DaemonSet at a certain point.
+
+   FIELDS:
+      lastTransitionTime   &lt;string&gt;
+        Last time the condition transitioned from one status to another.
+
+      message      &lt;string&gt;
+        A human readable message indicating details about the transition.
+
+      reason       &lt;string&gt;
+        The reason for the condition's last transition.
+
+      status       &lt;string&gt; -required-
+        Status of the condition, one of True, False, Unknown.
+
+      type &lt;string&gt; -required-
+        Type of DaemonSet condition.
+</code></pre>
+</li>
+<li>
+<p>Lastly, using both <a href="https://github.com/cncf/apisnoop/tree/main/kind" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>APIsnoop in cluster</a>
+ while reviewing the current <a href="https://github.com/kubernetes/kubernetes/tree/master/test/e2e" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>e2e test suite</a>
+ for existing conformance tests that test a similar set of endpoints. In this case we used <a href="https://github.com/kubernetes/kubernetes/blob/7b2776b89fb1be28d4e9203bdeec079be903c103/test/e2e/network/service.go#L2300-L2392" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>a Service Status test</a>
+ as a template for the new Daemonset test.</p>
+<pre><code class="language-sql">with latest_release as (
+select release::semver as release
+from open_api
+order by release::semver desc
+limit 1
+)
+
+select ec.endpoint, ec.path, ec.kind
+from endpoint_coverage  ec
+join latest_release on(ec.release::semver = latest_release.release)
+where level = 'stable'
+and ec.endpoint ilike '%NamespacedServiceStatus'
+and tested is true
+ORDER BY endpoint desc;
+</code></pre>
+<pre><code>                  endpoint               |                         path                          |  kind
+   --------------------------------------+-------------------------------------------------------+---------
+    replaceCoreV1NamespacedServiceStatus | /api/v1/namespaces/{namespace}/services/{name}/status | Service
+    readCoreV1NamespacedServiceStatus    | /api/v1/namespaces/{namespace}/services/{name}/status | Service
+    patchCoreV1NamespacedServiceStatus   | /api/v1/namespaces/{namespace}/services/{name}/status | Service
+   (3 rows)
+</code></pre>
+<p>The Service status e2e test followed similar ideas and patterns from <a href="https://github.com/kubernetes/kubernetes/blob/31030820be979ea0b2c39e08eb18fddd71f353ed/test/e2e/auth/certificates.go#L356-L383" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>/test/e2e/auth/certificates.go</a>
+ and <a href="https://github.com/kubernetes/kubernetes/blob/31030820be979ea0b2c39e08eb18fddd71f353ed/test/e2e/network/ingress.go#L1091-L1127" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>/test/e2e/network/ingress.go</a>
+</p>
+</li>
+</ol>
+<h1 id="writing-an-e2e-test">Writing an e2e test</h1>
+<h2 id="initial-exploration"><a href="#initial-exploration" class="anchor">#</a>Initial Exploration</h2>
+<p>Using <a href="https://wiki.c2.com/?LiterateProgramming" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>literate programming</a>
+ we created <a href="https://github.com/apisnoop/ticket-writing/blob/create-daemonset-status-lifecycle-test/Appsv1DaemonSetStatusLifecycleTest.org" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Appsv1DaemonSetStatusLifecycleTest.org</a>
+
+(via <a href="https://github.com/sharingio/pair" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>pair</a>
+) to both test and document the explorations of the endpoints. This provides a clear outline that should be easily replicated and validated by others as needed.
+Once completed, the document is converted into markdown which becomes a GitHub <a href="https://github.com/kubernetes/kubernetes/issues/100437" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>issue</a>
+.</p>
+<p>The issue provides the following before a PR is opened:</p>
+<ul>
+<li>a starting point to discuss the endpoints</li>
+<li>the approach taken to test them</li>
+<li>whether they are <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/conformance-tests.md#conformance-test-requirements" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>eligible for conformance</a>
+.</li>
+</ul>
+<h2 id="creating-the-e2e-test"><a href="#creating-the-e2e-test" class="anchor">#</a>Creating the e2e test</h2>
+<p>Utilizing the above document, the test is structured in to four parts;</p>
+<ol>
+<li>
+<p>Creating the resources for the test, in this case a DaemonSet and a ’watch’.</p>
+</li>
+<li>
+<p>Testing the first endpoint, <code>readAppsV1NamespacedReplicaSetStatus</code> via a <a href="https://github.com/ii/kubernetes/blob/ca3aa6f5af1b545b116b52c717b866e43c79079b/test/e2e/apps/daemon_set.go#L841" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>dynamic client</a>
+. This is due to the standard go client not being able to access the sub-resource. We also make sure there are no errors from either getting or decoding the response.</p>
+</li>
+<li>
+<p>The next endpoint tested is <code>replaceAppsV1NamespacedDaemonSetStatus</code> which replaces all status conditions at the same time. As the resource version of the DaemonSet may change before the new status conditions are updated we may need to <a href="https://github.com/ii/kubernetes/blob/ca3aa6f5af1b545b116b52c717b866e43c79079b/test/e2e/apps/daemon_set.go#L854" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>retry the request if there is a conflict</a>
+. Monitoring the watch events for the Daemonset we can confirm that the status conditions have been <a href="https://github.com/ii/kubernetes/blob/ca3aa6f5af1b545b116b52c717b866e43c79079b/test/e2e/apps/daemon_set.go#L884-L886" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>replaced</a>
+.</p>
+</li>
+<li>
+<p>The last endpoint tested is <code>patchAppsV1NamespacedReplicaSetStatus</code> which only patches a <a href="https://github.com/ii/kubernetes/blob/ca3aa6f5af1b545b116b52c717b866e43c79079b/test/e2e/apps/daemon_set.go#L906" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>single condition</a>
+ this time. Again, using the watch to monitor for events we can check that the single condition <a href="https://github.com/ii/kubernetes/blob/ca3aa6f5af1b545b116b52c717b866e43c79079b/test/e2e/apps/daemon_set.go#L931" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>has been updated</a>
+.</p>
+</li>
+</ol>
+<h2 id="validating-the-e2e-test"><a href="#validating-the-e2e-test" class="anchor">#</a>Validating the e2e test</h2>
+<p>Using <code>go test</code> we can run a single test for quick feedback</p>
+<pre><code class="language-bash">cd ~/go/src/k8s.io/kubernetes
+TEST_NAME=&quot;should verify changes to a daemon set status&quot;
+go test ./test/e2e/ -v -timeout=0  --report-dir=/tmp/ARTIFACTS -ginkgo.focus=&quot;$TEST_NAME&quot;
+</code></pre>
+<p>Checking the e2e test logs we see that everything looks to be okay.</p>
+<pre><code>[It] should verify changes to a daemon set status  /home/ii/go/src/k8s.io/kubernetes/test/e2e/apps/daemon_set.go:812
+STEP: Creating simple DaemonSet &quot;daemon-set&quot;
+STEP: Check that daemon pods launch on every node of the cluster.
+May 10 17:36:36.106: INFO: Number of nodes with available pods: 0
+May 10 17:36:36.106: INFO: Node heyste-control-plane-fkjmr is running more than one daemon pod
+May 10 17:36:37.123: INFO: Number of nodes with available pods: 0
+May 10 17:36:37.123: INFO: Node heyste-control-plane-fkjmr is running more than one daemon pod
+May 10 17:36:38.129: INFO: Number of nodes with available pods: 0
+May 10 17:36:38.129: INFO: Node heyste-control-plane-fkjmr is running more than one daemon pod
+May 10 17:36:39.122: INFO: Number of nodes with available pods: 1
+May 10 17:36:39.122: INFO: Number of running nodes: 1, number of available pods: 1
+STEP: Getting /status
+May 10 17:36:39.142: INFO: Daemon Set daemon-set has Conditions: []
+STEP: updating the DaemonSet Status
+May 10 17:36:39.160: INFO: updatedStatus.Conditions: []v1.DaemonSetCondition{v1.DaemonSetCondition{Type:&quot;StatusUpdate&quot;, Status:&quot;True&quot;, LastTransitionTime:v1.Time{Time:time.Ti
+me{wall:0x0, ext:0, loc:(*time.Location)(nil)}}, Reason:&quot;E2E&quot;, Message:&quot;Set from e2e test&quot;}}
+STEP: watching for the daemon set status to be updated
+May 10 17:36:39.163: INFO: Observed event: ADDED
+May 10 17:36:39.163: INFO: Observed event: MODIFIED
+May 10 17:36:39.163: INFO: Observed event: MODIFIED
+May 10 17:36:39.164: INFO: Observed event: MODIFIED
+May 10 17:36:39.164: INFO: Found daemon set daemon-set in namespace daemonsets-2986 with labels: map[daemonset-name:daemon-set] annotations: map[deprecated.daemonset.template
+.generation:1] &amp; Conditions: [{StatusUpdate True 0001-01-01 00:00:00 +0000 UTC E2E Set from e2e test}]
+May 10 17:36:39.164: INFO: Daemon set daemon-set has an updated status
+STEP: patching the DaemonSet Status
+STEP: watching for the daemon set status to be patched
+May 10 17:36:39.180: INFO: Observed event: ADDED
+May 10 17:36:39.180: INFO: Observed event: MODIFIED
+May 10 17:36:39.181: INFO: Observed event: MODIFIED
+May 10 17:36:39.181: INFO: Observed event: MODIFIED
+May 10 17:36:39.181: INFO: Observed daemon set daemon-set in namespace daemonsets-2986 with annotations: map[deprecated.daemonset.template.generation:1] &amp; Conditions: [{StatusUpdate True 0001-01-01 00:00:00 +0000 UTC E2E Set from e2e test}]
+May 10 17:36:39.181: INFO: Found daemon set daemon-set in namespace daemonsets-2986 with labels: map[daemonset-name:daemon-set] annotations: map[deprecated.daemonset.template.generation:1] &amp; Conditions: [{StatusPatched True 0001-01-01 00:00:00 +0000 UTC  }]
+May 10 17:36:39.181: INFO: Daemon set daemon-set has a patched status
+</code></pre>
+<p>Verification that the test passed!</p>
+<pre><code>Ran 1 of 5745 Specs in 18.473 seconds
+SUCCESS! -- 1 Passed | 0 Failed | 0 Pending | 5744 Skipped
+--- PASS: TestE2E (18.62s)
+</code></pre>
+<p>Using APISnoop with the audit logger we can also confirm that the endpoints where hit during the test.</p>
+<pre><code class="language-sql">select distinct  endpoint, right(useragent,75) AS useragent
+from testing.audit_event
+where endpoint ilike '%DaemonSetStatus%'
+and release_date::BIGINT &gt; round(((EXTRACT(EPOCH FROM NOW()))::numeric)*1000,0) - 60000
+and useragent like 'e2e%'
+order by endpoint;
+</code></pre>
+<pre><code>                endpoint                 |                             useragent
+-----------------------------------------+-------------------------------------------------------------------
+ patchAppsV1NamespacedReplicaSetStatus   | [sig-apps] ReplicaSet should validate Replicaset Status endpoints
+ readAppsV1NamespacedReplicaSetStatus    | [sig-apps] ReplicaSet should validate Replicaset Status endpoints
+ replaceAppsV1NamespacedReplicaSetStatus | [sig-apps] ReplicaSet should validate Replicaset Status endpoints
+(3 rows)
+</code></pre>
+<p>Even though the test has passed here, once merged it will join other jobs on <a href="https://testgrid.k8s.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>TestGrid</a>
+ to determine if the test is stable and after two weeks it can be <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/conformance-tests.md#promoting-tests-to-conformance" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>promoted to conformance</a>
+.</p>
+<h1 id="final-thoughts">Final Thoughts</h1>
+<p>The current workflow and tooling provides a high level of confidence when working through each e2e test. Following agreed coding patterns, styles and processes helps to minimise possible issues and test flakes. There’s always opportunities to get support through GitHub tickets, <a href="https://kubernetes.slack.com/messages/k8s-conformance" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>various Kubernetes slack channels</a>
+ and conformance meetings.</p>
+<p>Every e2e test that’s merged and then promoted to conformance requires the input from a wide range of people. It is thanks to the support from community reviewers, SIGs and the direction provided by SIG-Architecture this work is not just possible but rewarding.</p>
+
+
+            
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/cncf-dan/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">Thank You Dan Kohn</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/xds-conformance-project/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >xDS Conformance Project</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

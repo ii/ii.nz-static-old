@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Author on ii.nz</title>
+    <link>https://ii.nz/author/</link>
+    <description>Recent content in Author on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/author/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/zach-mandeville/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/zach-mandeville/</guid>
+      <description>Zach is a software engineer at ii. He loves sharing the excitement and awesome potential of technology through his work, storytelling, and mad science projects.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/caleb-woodbine/</link>
+      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/caleb-woodbine/</guid>
+      <description>Caleb is a software engineer at ii. Driven by community, he loves the collaboration of individuals - especially through Open Source. Caleb contributes to the Kubernetes Infrastructure working group, sig-testing, and the conformance working group. Caleb also spends way too much time with container technologies and Golang.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/stephen-heywood/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/stephen-heywood/</guid>
+      <description>Stephen Heywood is a cloud-native advocate that brings together 20 years of exploring open source technologies with an extensive set of skills from various industries.
+From tertiary education (12 years); corporate IT (5 years) and the electricity sector (8 years), each has provided him with a wealth of information and a long history of industry certifications.
+To unwind, Stephen enjoys an eclectic range of hobbies, from architecture, podcasts, movies while learning about different programming languages.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/riaan-kleinhans/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/riaan-kleinhans/</guid>
+      <description>Riaan Kleinhans is the Project manager at ii. Helping a team of talented people to focus on what they do best. Keeping the team organized and on target.</description>
+    </item>
+    
+    <item>
+      <title>Andrew Rynhard</title>
+      <link>https://ii.nz/author/andrew-rynhard/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/andrew-rynhard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/hippie-hacker/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/hippie-hacker/</guid>
+      <description>Chris McClimans is first and foremost a visionary. Chris envisions a world where everyone shares their knowledge base as well as their skills and resources. In our world of tech, this happens through open source.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/berno-kleinhans/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/berno-kleinhans/</guid>
+      <description>The first member of the ii groupies club. Striving for impactful change in the world through relationships and opensource collaboration.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ii.nz/author/brenda-peel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/author/brenda-peel/</guid>
+      <description>If you&amp;rsquo;d like to get in touch with ii, Brenda is your first point of contact.
+At ii, Brenda Peel seamlessly manages and coordinates all things from start to finish. There is nothing too big for Brenda to conquer. And she does it all with a smile.
+Before moving to New Zealand with her husband and two dogs, Brenda worked as a Publisher Relationship Manager and Digital Project Coordinator in Cape Town, South Africa.</description>
+    </item>
+    
+  </channel>
+</rss>

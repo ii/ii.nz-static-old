@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>RPi Zero Gadget Support | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/rpi-zero-gadget-support\/",
+      "name": "RPi Zero Gadget Support",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">RPi Zero Gadget Support</h1>
+              📆<time datetime="2015-12-06 00:00:00 &#43;0000 UTC" class="post__date">Dec 6 2015</time> 
+              <span class="post__date">🕚 2 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/hippie-hacker>
+                  Hippie Hacker
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<p>For most OTG supported ports, it depends on what you plug into it that decides if the port is in host mode or gadget mode. We just need to get confirmation that the RPi zero port is wired the same way for the port that has it&rsquo;s usb data pins connected (not the one dedicated to power).</p>
+<p><a href="https://en.wikipedia.org/wiki/USB_On-The-Go#OTG_micro_plugs" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>&ldquo;A device with a micro-A plug inserted becomes an OTG A-device, and a device with a micro-B plug inserted becomes a B-device. The type of plug inserted is detected by the state of the pin ID .&rdquo;</a>
+</p>
+<p>The RPi zero USB_OTGID pin should be grounded by the cable when using a micro-A / OTG cable and is hopefully left floating otherwise. That way we can the more common micro-B cable for providing power and connecting the usb data pins to a computer.</p>
+<p>Here is a RPi zero <a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/mechanical/rpi-zero-v1_2_dimensions.pdf" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>mechanical diagram</a>
+, that shows the two usb micro ports for the RPi zero in bottom right:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/31331/11607199/43a2a708-9b0b-11e5-8d98-518769d4df19.png" alt="image"></p>
+<p>I couldn&rsquo;t find wiring schematics for RPi zero, so I pulled these from the <a href="https://www.raspberrypi.org/wp-content/uploads/2012/10/Raspberry-Pi-R2.0-Schematics-Issue2.2_027.pdf" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>RPi A</a>
+</p>
+<p>This is the usb micro port used for power: (no data pins)</p>
+<p><img src="https://cloud.githubusercontent.com/assets/31331/11607210/b6d0f310-9b0b-11e5-97fb-1de5d360647c.png" alt="image"></p>
+<p>This is the RPi-A USB-A port (note that the USB_OTGID pin on the usb controller is grounded). On the RPi zero, this connector is a micro-b port, and shouldn&rsquo;t have the USB_OTGID pin grounded, as that is usually done by the cable to distinguish between OTG/Host mode and usb gadget mode.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/31331/11607223/fecac092-9b0b-11e5-8bcf-1d3f2b8e107b.png" alt="image"></p>
+<p>I suspect that if we connect a normal <a href="https://en.wikipedia.org/wiki/USB#Cable_plugs_.28USB_1.x.2F2.0.29" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>usb A to Micro-B cable</a>
+ that doesn&rsquo;t ground out the USB_OTGID pin on the RPi zero, that we can accomplish the correct physical connections without any modifications, but we may need the kernel changes mentioned in this <a href="https://github.com/raspberrypi/linux/issues/881#issuecomment-161411866" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>comment on #881</a>
+</p>
+<p>Having a $5 usb gadget that could function as a combination of anything in <a href="https://github.com/torvalds/linux/tree/master/drivers/usb/gadget/function" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>https://github.com/torvalds/linux/tree/master/drivers/usb/gadget/function</a>
+ would be pretty grand.</p>
+<p>I&rsquo;ve opened a ticket for PRi linux kernel to <a href="https://github.com/raspberrypi/linux/issues/1212" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>discuss this</a>
+.</p>
+
+
+            
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/digital-ocean-apiv2--in-chef-provisioning/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">Digital Ocean APIv2  in chef-provisioning</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/5-usb-gadgets-for-everyone/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >5 Dollar USB Gadgets for Everyone</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

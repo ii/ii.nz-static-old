@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Flashing hardware with software from the web | ii.nz</title>
+
+  <meta name="ii" content="cool">
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.2cdedeaee06d510cb6af67a8b95ad416aaefd78e2001e4f3e84bd07b2aa0e45d.css" integrity="sha256-LN7eruBtUQy2r2eouVrUFqrv144gAeTz6EvQeyqg5F0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+  
+
+<script type="application/ld+json">
+  
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/ii.nz\/post\/flashing-hardware-with-software-from-the-web\/",
+      "name": "Flashing hardware with software from the web",
+      "author": {
+        "@type": "Person",
+        "name": ""
+      },
+      "description": ""
+    }
+  
+  </script>
+<link rel='stylesheet' type='text/css' href='/ii-style.css'>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+    <h1>ii.nz<span class="fancy">.</span></h1>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">home 🏠</a>
+      </li>
+    
+      <li>
+        <a  href="/about">about 🧄</a>
+      </li>
+    
+      <li>
+        <a  href="/post">posts 📜</a>
+      </li>
+    
+      <li>
+        <a  href="/stories">stories 🗨️ </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            
+            <div class="post__metadata">
+              <h1 id="post__title">Flashing hardware with software from the web</h1>
+              📆<time datetime="2017-01-04 00:00:00 &#43;0000 UTC" class="post__date">Jan 4 2017</time> 
+              <span class="post__date">🕚 2 min read</span>
+              <div class="authors">
+                by
+                
+                <a class="author" href=/author/hippie-hacker>
+                  Hippie Hacker
+                </a>
+                
+              </div>
+              
+            </div>
+          </header>
+          <article class="post__content">
+            
+<h2 id="its-possible-to-flash-hardware-from-the-web"><a href="#its-possible-to-flash-hardware-from-the-web" class="anchor">#</a>It&rsquo;s possible to flash hardware from the web</h2>
+<p>Getting custom software onto hardware is hard. Particularly if you want people to be able to modify, change, and share that software. It can be as easy visiting a web page, connecting our devices, and loading our customized versions.</p>
+<p><a href="http://flash.getchip.com/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>flash.getchip.com</a>
+
+uses the <a href="https://chrome.google.com/webstore/detail/chip-flasher/bpohdfcdfghdcgflomadkijfdgalcgoi" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>C.H.I.P. Flasher
+chrome-plugin</a>
+</p>
+<p>Most AllWinner <a href="http://linux-sunxi.org/BROM" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>boot roms</a>
+ detect when a uboot pin
+is connected to ground. This forces the devices into <a href="http://linux-sunxi.org/FEL" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>FEL
+mode</a>
+ to support flashing. On the
+<a href="https://getchip.com/pages/chip" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>C.H.I.P.</a>
+, a physical paperclip can be used to
+short the uboot/FEL pin.</p>
+<h2 id="a-paperclip-or-jumper-wire-is-used-to-turn-on-write-mode"><a href="#a-paperclip-or-jumper-wire-is-used-to-turn-on-write-mode" class="anchor">#</a>A paperclip or jumper wire is used to turn on write-mode</h2>
+<p><img src="/images/2017/01/uboot_fel_jumper.jpg" alt="jumper wire in correct place in chip"></p>
+<p>This allows the website + plugin to detect the C.H.I.P. and present valid images for flashing.</p>
+<p><img src="/images/2017/01/Flasher-CHIP-Detected.png" alt="image"></p>
+<p><img src="/images/2017/01/Flasher-CHIP-details.png" alt="image"></p>
+<p>The images can be saved to disk and the plugin can be used offline to flash again.</p>
+<blockquote>
+<p>Flashing will download between 250MB-625MB of data. If you have a slow internet connection, it can take a very long time to finish. If your connection is slow, we recommend that you click on the &ldquo;cloud&rdquo; icon in the upper-right corner of the image you want, and download the file first. You can then use the &ldquo;Choose a file&hellip;&rdquo; option once it&rsquo;s downloaded.</p>
+</blockquote>
+<h2 id="currently-only-a-few-images-are-available"><a href="#currently-only-a-few-images-are-available" class="anchor">#</a>Currently only a few images are available</h2>
+<p><img src="/images/2017/01/Flasher-CHIP-image-selection-1.png" alt="image"></p>
+<p><strong>However this chrome plugin could be used with any custom OS image build pipeline to deploy directly to hardware from the web!</strong></p>
+<p>We&rsquo;ve took <a href="https://github.com/resin-os" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>resinOS</a>
+ and <a href="https://gitlab.ii.org.nz/iichip/resin-chip/blob/fastbuild/chip.json" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>ported it to the
+C.H.I.P.</a>
+
+and think it would be useful to flash any AllWinner/FEL device directly from
+gitlab or other ci automation pipeline web interface.</p>
+<p><img src="/images/2017/01/resin-chip-build-1.png" alt="image"></p>
+<p>What if we could replace the <em>Download</em> link with <em>Flash</em> directly?</p>
+<p><img src="/images/2017/01/resinos-chip-download.png" alt="image"></p>
+<h2 id="whats-needed"><a href="#whats-needed" class="anchor">#</a>What&rsquo;s needed?</h2>
+<ul>
+<li>NextThingCo recently updated their
+<a href="https://github.com/NextThingCo/CHIP-buildroot" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>BuildRoot</a>
+ to <a href="https://bbs.nextthing.co/t/new-chip-sdk-chip-tools-update/12980" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>use a new
+image
+format</a>
+
+which we still need to update our <a href="https://gitlab.ii.org.nz/iichip/resin-chip/issues/1" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>resin port to
+C.H.I.P.</a>
+
+to use.</li>
+<li>NextThingCo also <a href="https://github.com/NextThingCo/CHIP-SDK/issues/18" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>doesn&rsquo;t seem to
+publish</a>
+ the plugin
+source, but <a href="https://gitlab.ii.org.nz/iichip/CHIP-flasher-chromeplugin" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>we&rsquo;ve pulled it out of the plugin to
+analyze</a>
+.
+We have a couple open tickets:
+<ul>
+<li><a href="https://gitlab.ii.org.nz/iichip/iichip/issues/1" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Locate NextThingCo src for CHIP-flasher chrome plugin</a>
+</li>
+<li><a href="https://gitlab.ii.org.nz/iichip/sunxi-fel-chrome-extension/issues/1" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Build, install, and use the upstream sunxi-fel-chrome-plugin to install firmware to an iiCHIP</a>
+</li>
+<li><a href="https://gitlab.ii.org.nz/iichip/iichip/issues/2" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Deliver forked CHIP images via a webpage</a>
+.</li>
+</ul>
+</li>
+</ul>
+
+
+            
+          </article>
+          
+
+<ul class="tags__list">
+    
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/kubernetes/">kubernetes</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://ii.nz/tags/cloud/">cloud</a>
+    </li></ul>
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://ii.nz/post/funding-community-initiatives/">
+        <span class="pagination__label"></span>
+        <span class="pagination__title">funding community initiatives</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="https://ii.nz/post/bringing-the-cloud-to-your-community/">
+      <span class="pagination__label"></span>
+      <span class="pagination__title" >Bringing the cloud to your community</span>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitLab"
+         href="https://gitlab.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/gitlab.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ii"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/github.svg')"></div>
+      </a>
+    
+  
+    
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:hello@ii.coop"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://ii.nz/svg/email.svg')"></div>
+      </a>
+    
+  
+</div>
+
+            <p>© 2023</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.301a8b0870381bf76b3b5182e8966d363a0474281183439beb024d8b8228fc66.js" integrity="sha256-MBqLCHA4G/drO1GC6JZtNjoEdCgRg0Ob6wJNi4Io/GY=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

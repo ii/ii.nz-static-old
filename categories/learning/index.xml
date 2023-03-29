@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>learning on ii.nz</title>
+    <link>https://ii.nz/categories/learning/</link>
+    <description>Recent content in learning on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Tue, 24 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/categories/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a data pipeline for displaying Kubernetes public artifact traffic</title>
+      <link>https://ii.nz/post/building-a-data-pipeline-for-displaying-kubernetes-public-artifact-traffic/</link>
+      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/building-a-data-pipeline-for-displaying-kubernetes-public-artifact-traffic/</guid>
+      <description>How ii built a pipeline for Kubernetes public artifact traffic</description>
+    </item>
+    
+    <item>
+      <title>Learning Update: Introduction to gRPC</title>
+      <link>https://ii.nz/post/grpc-learning/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/grpc-learning/</guid>
+      <description>An update on an ii member&amp;rsquo;s journey on learning gRPC</description>
+    </item>
+    
+  </channel>
+</rss>

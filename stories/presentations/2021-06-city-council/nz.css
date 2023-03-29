@@ -1,0 +1,39 @@
+.reveal p {
+  text-align: left;
+}
+.reveal table {
+  display: block;
+  font-size: 0.5em;
+  overflow: auto;
+  max-height: 600px;
+}
+.reveal code {
+  color: LightSlateGray;
+}
+div.legalese {
+  font-size: 1.4vh;
+  position: fixed;
+  left: 3px;
+  bottom: 3px;
+  z-index: 50;
+}
+.reveal ul {
+  display: block;
+}
+.reveal ol {
+  display: block;
+}
+.hide-headers h2 {
+  visibility: hidden;
+}
+.hide-headers h3 {
+  visibility: hidden;
+}
+.align-left {
+  text-align: left;
+}
+body
+  > div.reveal.fade.center.focused.has-vertical-slides.has-horizontal-slides.has-parallax-background.ready
+  > aside {
+  margin-right: 100px;
+}

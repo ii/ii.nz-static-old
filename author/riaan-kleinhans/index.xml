@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ii.nz</title>
+    <link>https://ii.nz/author/riaan-kleinhans/</link>
+    <description>Recent content on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/author/riaan-kleinhans/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thank You Dan Kohn</title>
+      <link>https://ii.nz/post/cncf-dan/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/cncf-dan/</guid>
+      <description>He believed in ii, and in all of us.</description>
+    </item>
+    
+  </channel>
+</rss>

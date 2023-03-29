@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ii.nz</title>
+    <link>https://ii.nz/</link>
+    <description>Recent content on ii.nz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ii.nz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a data pipeline for displaying Kubernetes public artifact traffic</title>
+      <link>https://ii.nz/post/building-a-data-pipeline-for-displaying-kubernetes-public-artifact-traffic/</link>
+      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/building-a-data-pipeline-for-displaying-kubernetes-public-artifact-traffic/</guid>
+      <description>How ii built a pipeline for Kubernetes public artifact traffic</description>
+    </item>
+    
+    <item>
+      <title>Rerouting Container Registries With Envoy</title>
+      <link>https://ii.nz/post/rerouting-container-registries-with-envoy/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/rerouting-container-registries-with-envoy/</guid>
+      <description>Share the traffic across many container registries with Envoy</description>
+    </item>
+    
+    <item>
+      <title>Going Far Together: Open-Source Technology In Post-COVID New Zealand</title>
+      <link>https://ii.nz/post/going-far-together--open-source-technology-in-post-covid-new-zealand/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/going-far-together--open-source-technology-in-post-covid-new-zealand/</guid>
+      <description>&amp;ldquo;If you want to go fast, go alone; But if you want to go far, go together.&amp;rdquo; This statement about a culture I was then entering into for the first time left with me a strong impression about who New Zealanders are.</description>
+    </item>
+    
+    <item>
+      <title>Mr. Rogers Congressional Invitation To Participate</title>
+      <link>https://ii.nz/post/mr--rogers-congressional-invitation-to-participate/</link>
+      <pubDate>Thu, 01 May 1969 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/mr--rogers-congressional-invitation-to-participate/</guid>
+      <description>Video and congressional record of Mr. Roger&amp;rsquo;s invitation to &amp;rsquo;neighborhood expressions of care&#39;</description>
+    </item>
+    
+    <item>
+      <title>I Trust That You Will Read This</title>
+      <link>https://ii.nz/post/i-trust-that-you-will-read-this/</link>
+      <pubDate>Thu, 01 May 1969 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/i-trust-that-you-will-read-this/</guid>
+      <description>I searched for many years for this &amp;ldquo;Philisophical Statement that will take about ten minutes to read&amp;rdquo;, which includes much more songs and insight into the heart of Mr. Rogers.</description>
+    </item>
+    
+    <item>
+      <title>xDS Conformance Project</title>
+      <link>https://ii.nz/post/xds-conformance-project/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/xds-conformance-project/</guid>
+      <description>A look into the work ii has done on the xdS conformance test framework</description>
+    </item>
+    
+    <item>
+      <title>Creating an e2e test for Conformance</title>
+      <link>https://ii.nz/post/creating-an-e2e-test-for-conformance/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/creating-an-e2e-test-for-conformance/</guid>
+      <description>Finding untested stable endpoints and creating an e2e test for conformance.</description>
+    </item>
+    
+    <item>
+      <title>Thank You Dan Kohn</title>
+      <link>https://ii.nz/post/cncf-dan/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/cncf-dan/</guid>
+      <description>He believed in ii, and in all of us.</description>
+    </item>
+    
+    <item>
+      <title>Learning Update: Introduction to gRPC</title>
+      <link>https://ii.nz/post/grpc-learning/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/grpc-learning/</guid>
+      <description>An update on an ii member&amp;rsquo;s journey on learning gRPC</description>
+    </item>
+    
+    <item>
+      <title>Deploying Talos to Equinix</title>
+      <link>https://ii.nz/post/deplying-talos-to-equinix/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/deplying-talos-to-equinix/</guid>
+      <description>From nodes to workloads on baremetal</description>
+    </item>
+    
+    <item>
+      <title>Bringing the cloud to your community</title>
+      <link>https://ii.nz/post/bringing-the-cloud-to-your-community/</link>
+      <pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/bringing-the-cloud-to-your-community/</guid>
+      <description>Creating local clouds should not be hard</description>
+    </item>
+    
+    <item>
+      <title>Flashing hardware with software from the web</title>
+      <link>https://ii.nz/post/flashing-hardware-with-software-from-the-web/</link>
+      <pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/flashing-hardware-with-software-from-the-web/</guid>
+      <description>It&amp;rsquo;s possible to flash hardware from the web</description>
+    </item>
+    
+    <item>
+      <title>funding community initiatives</title>
+      <link>https://ii.nz/post/funding-community-initiatives/</link>
+      <pubDate>Wed, 14 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/funding-community-initiatives/</guid>
+      <description>If you want to cobudget with us, write your email and #chilli4change on a physical envolope with your contribution and drop it by in person&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>sharing values&#43;feelings and spending time&#43;$ together</title>
+      <link>https://ii.nz/post/sharing-values&#43;feelings-and-spending-time&#43;-together/</link>
+      <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/sharing-values&#43;feelings-and-spending-time&#43;-together/</guid>
+      <description>Friday, ii hosted the first #chilliforchange and spent some time asking our community to finish a few sentences: I want x, I value y, I feel z&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>ii wants #chilli4change @basestationnz</title>
+      <link>https://ii.nz/post/ii-wants-chilli4change-basestationnz/</link>
+      <pubDate>Fri, 09 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/ii-wants-chilli4change-basestationnz/</guid>
+      <description>We hope this initial #chili4change provides a forum for a heated discussion of innovation around an (optionally) spicy meal brought to you by ii</description>
+    </item>
+    
+    <item>
+      <title>SSL Certificate Bindings on Windows with Chef</title>
+      <link>https://ii.nz/post/ssl-certificate-bindings-on-windows-with-chef/</link>
+      <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/ssl-certificate-bindings-on-windows-with-chef/</guid>
+      <description>Enusring ssl certificates on windows are installed correctly.</description>
+    </item>
+    
+    <item>
+      <title>Using cookbook_file per Node on Windows</title>
+      <link>https://ii.nz/post/using-cookbook_file-per-node-on-windows/</link>
+      <pubDate>Tue, 06 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/using-cookbook_file-per-node-on-windows/</guid>
+      <description>I needed to deploy a different node specific license file to our windows hosts so I wrote a cookbook_file resource&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>helping blind youth to see the stars</title>
+      <link>https://ii.nz/post/helping-blind-youth-to-see-the-stars/</link>
+      <pubDate>Mon, 05 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/helping-blind-youth-to-see-the-stars/</guid>
+      <description>We got together with people who create and code at the osos.nz to innovate together on opensource projects</description>
+    </item>
+    
+    <item>
+      <title>Pushing vagrant speed with squid for all http &#43; https traffic</title>
+      <link>https://ii.nz/post/pushing-vagrant-speed-with-squid-for-all-http-&#43;-https-traffic/</link>
+      <pubDate>Sat, 19 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/pushing-vagrant-speed-with-squid-for-all-http-&#43;-https-traffic/</guid>
+      <description>docker run proxy exports an https certificate AND three ports for http / https proxying</description>
+    </item>
+    
+    <item>
+      <title>5 Dollar USB Gadgets for Everyone</title>
+      <link>https://ii.nz/post/5-usb-gadgets-for-everyone/</link>
+      <pubDate>Sun, 06 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/5-usb-gadgets-for-everyone/</guid>
+      <description>In my work trying to create devices that can install OSes from scratch on computers and flash phones and embedded IoT devices, I&amp;rsquo;m always looking for things that can support being both a usb host and a usb gadget.</description>
+    </item>
+    
+    <item>
+      <title>RPi Zero Gadget Support</title>
+      <link>https://ii.nz/post/rpi-zero-gadget-support/</link>
+      <pubDate>Sun, 06 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/rpi-zero-gadget-support/</guid>
+      <description>For most OTG supported ports, it depends on what you plug into it that decides if the port is in host mode or gadget mode. We just need to get confirmation that the RPi zero port is wired the same way for the port that has it&amp;rsquo;s usb data pins connected (not the one dedicated to power).</description>
+    </item>
+    
+    <item>
+      <title>Digital Ocean APIv2  in chef-provisioning</title>
+      <link>https://ii.nz/post/digital-ocean-apiv2--in-chef-provisioning/</link>
+      <pubDate>Fri, 30 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/post/digital-ocean-apiv2--in-chef-provisioning/</guid>
+      <description>Digital ocean is sunsetting api v1 on November 9th.  It&amp;rsquo;s taken a while, but @geemus released support in fog v1.35.0</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://ii.nz/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/about/</guid>
+      <description>We are a tech company based in the Bay of Plenty, Aotearoa New Zealand.
+We are cool. We design and develop new software solutions that achieve amazing things through collaboration with business, government and community groups.</description>
+    </item>
+    
+    <item>
+      <title>Archives</title>
+      <link>https://ii.nz/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stories</title>
+      <link>https://ii.nz/stories/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ii.nz/stories/</guid>
+      <description>ii&amp;#39;s stories, history, and talks
+2021 Kubecon NA Virtual A talk on the tooling that has been used the community to bring Kubernetes Conformance coverage up to 77% by Stephen Heywood and Caleb Woodbine.
+Available as - video - slides - sched
+2021 ii discusses the careers expo event In Tauranga, there was a careers expo for students and the public to attend. At the event, ii a had a booth to invoke discussion on things such as cloud, Open Source, and technology.</description>
+    </item>
+    
+  </channel>
+</rss>
