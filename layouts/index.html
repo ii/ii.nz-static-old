@@ -1,0 +1,32 @@
+{{ define "styles" }}
+    {{ $.Scratch.Set "style_opts" (dict "src" "scss/pages/about.scss" "dest" "css/about.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="splash-container">
+  <div class="splash">
+
+    <h1>{{ .Params.heading | emojify }}<span class="fancy">.</span></h1>
+    {{ if isset .Params "handle" }}
+    <span class="handle">@{{ .Params.handle }}</span>
+    {{ end }}
+    <h2>
+      {{ .Params.subheading | emojify }}
+    </h2>
+    <!-- Replace MEEEEE -->
+    <p class='purpose'>
+      {{ .Params.purpose | emojify }}
+    </p>
+    {{ partial "social-icons.html" .}}
+    {{ if .Params.special }}
+    <p class='special'>
+      {{ .Params.special | emojify }}
+      <br/>
+      <a target="_blank" rel="noreferrer" href="{{ .Params.specialLink }}">{{ .Params.specialLinkTitle | emojify }}</a>
+    </p>
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}

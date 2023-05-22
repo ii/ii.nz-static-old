@@ -1,0 +1,52 @@
++++
+title = "Stories"
+type = "stories"
++++
+
+#+begin_quote
+ii's stories, history, and talks
+#+end_quote
+
+* 2021 Kubecon NA Virtual
+A talk on the tooling that has been used the community to bring Kubernetes Conformance coverage up to 77% by Stephen Heywood and Caleb Woodbine.
+
+Available as - [[https://www.youtube.com/watch?v=IQsBahak7PQ][video]] - [[https://github.com/cncf/apisnoop/tree/90d10f828426c3c7d88ada1b3f66d3391c123258/docs/presentations/kubecon-2021-north-america][slides]] - [[https://kccncna2021.sched.com/event/lV8X/conformance-testing-the-kubernetes-api-tooling-that-makes-the-difference-stephen-heywood-caleb-woodbine-iinz][sched]]
+
+* 2021 ii discusses the careers expo event
+In Tauranga, there was a careers expo for students and the public to attend. At the event, ii a had a booth to invoke discussion on things such as cloud, Open Source, and technology.
+
+After the event was over over, ii and related folks joined together to discuss the event and how it went.
+
+Available as - [[https://vimeo.com/582634361][video]] - [[https://hackmd.io/qMQxceJ6SWKa_mtx34aBfA?view][hackmd]]
+* 2021 Hippie + ii + local
+Similar to the talk to the Tauranga City council, this is a talk by Hippie Hacker in conversation with Priyanka Sharma [GM] of the CNCF.
+
+Available as - [[./presentations/2021-07-hippie-ii-local/index.html][slides]]
+* 2021 City Council
+A talk to Tauranga City council by Hippie Hacker.
+
+Available as - [[https://youtu.be/mCIFcId1Yyk?t=4817][video]] - [[./presentations/2021-06-city-council/index.html][slides]]
+* 2021 Kubecon EU Virtual
+A talk on what Kubernetes Conformance is and how to contribute to it by Zach Mandeville and Caleb Woodbine.
+
+Available as - [[https://www.youtube.com/watch?v=05NMwOhD6Ks][video]] - [[https://github.com/cncf/apisnoop/tree/9afb85e30be09709edd5e32201317f5ec09bc83d/docs/presentations/kubecon-2021-europe][slides]] - [[https://kccnceu2021.sched.com/event/iE77/contributing-to-kubernetes-conformance-coverage-zach-mandeville-caleb-woodbine-iicoop-httpsiicoop][sched]]
+* 2020 Kubecon NA Virtual
+A talk on Kubernetes Conformance coverage and how to contribute to it by Caleb Woodbine and Hippie Hacker.
+
+Available as - [[https://www.youtube.com/watch?v=8iSXMewnIzg][video]] - [[https://github.com/cncf/apisnoop/tree/9afb85e30be09709edd5e32201317f5ec09bc83d/docs/presentations/kubecon-2020-north-america][slides]] - [[https://kccncna20.sched.com/event/ekHw/contributing-to-kubernetes-conformance-coverage-hippie-hacker-caleb-woodbine-iicoop][sched]]
+* 2019 Kubecon NA - San Diego : K8s-Conformance & Sig-Arch subgroup
+A talk all about what the Kubernetes Conformance project by Dan Kohn, John Belameric, and Hippie Hacker.
+
+Available as - [[https://www.youtube.com/watch?v=hzZm5wX1tyQ][video]] - [[https://kccncna19.sched.com/event/VyC7/k8s-conformance-sig-architecture-conformance-subgroup-hippie-hacker-iicoop-dan-kohn-cncf-john-belamaric-google][sched]]
+* 2019 Kubecon NA - San Diego : Precisecly Defining Kubernetes The Path of Conformance
+A talk describing the journey of Kubernetes Conformance, it's contributors, and the story of how the community got the the place it's in by Hippie Hacker.
+
+Available as - [[https://www.youtube.com/watch?v=H5J5MmG_XFg][video]] - [[https://github.com/cncf/apisnoop/blob/main/org/presentations/KubeKohn-NA-2019.org#a-view-from-the-sky][slides]] - [[https://kcsna2019.sched.com/event/XClW][sched]]
+* 2018 KubeCon - Shanghai : Discovering the untold user stories of Kubernetes with applied anthropology
+A story about tracing the developments of Kubernetes and the given contributors, gided by the use of a Māori pepeha lens by Hippie Hacker and Indigo Phillips.
+
+Available as - [[https://kccncchina2018english.sched.com/event/FuKl/discovering-the-untold-user-stories-of-kubernetes-with-applied-anthropology-hippie-hacker-indigo-phillips-iicoop][sched]] - [[https://www.youtube.com/watch?v=D-mqeCQNvU0][video]] - [[https://docs.google.com/presentation/d/1dPGAXCS9pSQe8ZIbKBaQX1VDr8YKx4Qj8rEA7OlUkH0/edit?usp=sharing][slides]] - related video (hippie tries to explain maori concepts to sig-arch): https://youtu.be/HhvF_aQyrSI?t=1657
+* 2017 Bay Waka : Local kid makes good on world stage
+A newspaper article written by David Hart about ii, and Hippie Hacker and Denver Williams's trip to Berlin.
+
+Available as - [[https://issuu.com/baywaka/docs/bay_waka_-_issue_7_-_apr-jun_2017/44][article]]

@@ -1,0 +1,291 @@
+div.summary {
+  font-size: 1rem;
+  color: gray;
+}
+div.summary p {
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+div.flex-wrapper,
+div.post-list__container {
+  max-width: 38rem;
+  margin: auto;
+  padding-left: 0;
+}
+
+.author {
+  padding: 3px;
+}
+
+div.authors {
+  margin-top: 1rem;
+}
+
+a.author {
+  margin-right: 0.25rem;
+}
+p.purpose {
+  max-width: 30rem;
+}
+p.special {
+  max-width: 30rem;
+  background-color: #ddf3ffad;
+  border-radius: 10px;
+  padding: 10px 10px;
+  border: 5px solid #dddddd;
+  box-shadow: #b681a8 10px 10px 47px -13px, #000000ab 6px 6px 0px 1px;
+  line-height: 2.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+p.special a {
+  color: black;
+  text-underline-position: under;
+  background: #d0faed;
+  border-radius: 30px;
+  padding: 5px 10px 10px 5px;
+}
+
+p.special a:hover {
+  background: #8ac7b4;
+}
+
+div#about section#humans {
+  display: flex;
+  flex-flow: column;
+}
+
+div#about h2 {
+  font-size: 1.5rem;
+}
+
+section#humans article {
+  margin: 1rem 0 1rem 0;
+  background: #f9fcff;
+  padding: 14px;
+  border-radius: 30px;
+  box-shadow: black 0 10px 76px -60px;
+}
+
+section#humans article h3 {
+  font-size: 1rem;
+  text-align: center;
+}
+
+section#humans div.profile-photo,
+div.profile-info > div.profile-photo {
+  margin: 1rem auto 1rem auto;
+  position: relative;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+section#humans article div.content.long {
+  height: 200px;
+  overflow: hidden;
+}
+
+button.read-more {
+  font-size: 1rem;
+  outline: 0;
+  border: 0;
+  background: unset;
+  cursor: pointer;
+}
+
+button.read-more:hover {
+  color: dodgerblue;
+}
+
+div.profile-info {
+  max-width: 34rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#humans a {
+  color: #000;
+}
+
+.splash h1 {
+  background: linear-gradient(341deg, #ceecb738, #6db3d940);
+  border-radius: 10px;
+  padding: 10px 10px;
+  border: 5px solid #dddddd;
+  box-shadow: #000000ab 6px 6px 0px 1px, #dec7e9 10px 10px 17px 7px;
+  margin-bottom: 3vh;
+}
+
+.splash-container {
+  align-items: normal;
+  z-index: 100;
+}
+
+main,
+nav.nav {
+  padding-top: 5rem;
+}
+
+div.burger {
+  flex: 0.1;
+}
+
+.burger__container {
+  box-shadow: black 0 10px 50px -27px;
+  visibility: visible;
+}
+
+.burger__container h1 {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  flex: 100;
+}
+
+.burger__container h1:link,
+.burger__container h1:visited,
+.burger__container h1:hover,
+.burger__container h1:active {
+  text-decoration: none;
+  color: black;
+}
+
+.social-icons {
+  justify-content: center;
+  margin-left: 0;
+}
+
+div.splash h2 {
+  text-align: center;
+}
+
+li.post {
+  background-color: #fcfcfc;
+  border-radius: 20px;
+  padding: 10px 10px;
+  box-shadow: black 0 10px 48px -40px;
+}
+
+li.post:active {
+  background-color: #f8f8f8;
+  border-radius: 20px;
+  box-shadow: black 0 10px 50px -40px;
+}
+
+div.post__metadata {
+  background: linear-gradient(343deg, #9b0b3378, #49bfff);
+  border-radius: 20px;
+  padding: 2vh;
+  color: white;
+  border: 5px solid #d6d6d6;
+  box-shadow: #000000ab 7px 7px 0px -2px, #e4e4e4 10px 10px 17px 7px;
+  margin-bottom: 3rem;
+}
+
+header.post__header {
+  margin-bottom: 0rem;
+}
+
+* {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 2.3em;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 1000;
+  line-height: 1em;
+}
+
+h2,
+h3 {
+  font-size: 1.8em;
+}
+
+article.post__content {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+div.post-list__main {
+  max-width: 38rem;
+  margin: auto;
+}
+
+div.post-list__main h1 {
+  margin-top: 0;
+}
+
+div.post__metadata span.post__date,
+div.post__metadata time.post__date {
+  color: white;
+}
+
+.post__title {
+  line-height: 2rem;
+}
+
+ul.post-list li,
+article.post__content,
+section#humans {
+  animation: fadein 1.2s linear;
+}
+
+header {
+  margin-bottom: 3rem;
+}
+
+.post__content img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1200px) {
+  div.burger__container {
+    visibility: hidden;
+  }
+  nav.nav {
+    padding-top: 3rem;
+  }
+  div#about section#humans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 7rem;
+  }
+
+  main {
+    padding-top: 3rem;
+    padding-left: 0;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slidein {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100vh;
+  }
+}

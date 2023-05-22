@@ -1,0 +1,15 @@
+<div class="pagination">
+  {{if .PrevInSection}}
+    <a class="pagination__item" href="{{.PrevInSection.Permalink}}">
+        <span class="pagination__label">{{ i18n "prev_post" | emojify }}</span>
+        <span class="pagination__title">{{.PrevInSection.Title | emojify }}</span>
+    </a>
+  {{end}}
+
+  {{if .NextInSection}}
+    <a class="pagination__item" href="{{.NextInSection.Permalink}}">
+      <span class="pagination__label">{{ i18n "next_post" | emojify }}</span>
+      <span class="pagination__title" >{{.NextInSection.Title | emojify }}</span>
+    </a>
+  {{end}}
+</div>

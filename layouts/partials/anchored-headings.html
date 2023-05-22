@@ -1,0 +1,2 @@
+<!-- formats .Content headings by adding an anchor -->
+{{ . | replaceRE "(<h[2-6] id=\"([a-zA-Z0-9-+]+)\">)" "${1}<a href=\"#${2}\" class=\"anchor\">#</a>" | safeHTML }}

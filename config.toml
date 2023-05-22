@@ -1,0 +1,65 @@
+baseURL = 'https://ii.nz/'
+languageCode = 'en-nz'
+title = 'ii.nz'
+theme = 'harbor'
+paginate = 30
+copyright = "© 2023"
+enableEmoji = true
+
+[params]
+# Follow the Hugo date/time format reference here:
+# https://gohugo.io/functions/format/#gos-layout-string
+mainSections = ["post"]
+dateFormat = "Jan 2 2006"
+iconOrder = ["GitLab", "GitHub", "Email"]
+# Set to true to display page title in table of contents in blog posts.
+showPageTitleInTOC = false
+github = "https://github.com/ii"
+gitlab = "https://gitlab.com/ii"
+email = "mailto:hello@ii.coop"
+
+#This disables Hugo's default syntax highlighting in favor
+# of prismjs. If you wish to use Hugo's default syntax highlighting
+# over prismjs, remove this. You will also need to remove the prismjs
+# vendor script in layouts/blog/single.html.
+[markup]
+  [markup.highlight]
+    codeFences = false
+
+  # Set to false to disallow raw HTML in markdown files
+  [markup.goldmark.renderer]
+      unsafe = true
+
+# Controls the navigation
+[[menu.main]]
+  identifier = "home"
+  name = "home 🏠"
+  title = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "about"
+  name = "about 🧄"
+  title = "About"
+  url = "/about"
+  weight = 2
+
+[[menu.main]]
+  identifier = "Posts"
+  name = "posts 📜"
+  title = "Posts"
+  url = "/post"
+  weight = 3
+
+[[menu.main]]
+  identifier = "stories"
+  name = "stories 🗨️ "
+  title = "Stories"
+  url = "/stories"
+  weight = 4
+
+[taxonomies]
+ author = "author"
+ tag = "tags"
+ category = "categories"
